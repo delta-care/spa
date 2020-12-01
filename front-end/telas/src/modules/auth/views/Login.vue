@@ -4,7 +4,7 @@
       <v-flex xs12 sm6 md4 lg3 x13>
         <v-card class="elevation-12">
           <v-toolbar color="primary" dark>
-            <v-toolbar-title>Login</v-toolbar-title>
+            <v-toolbar-title>Entrar</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
             <v-form>
@@ -27,7 +27,6 @@
                 :success="!$v.user.password.$invalid"
               ></v-text-field>
             </v-form>
-            <v-btn block depressed @click="log"> Criar Conta </v-btn>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
