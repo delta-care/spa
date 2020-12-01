@@ -5,6 +5,13 @@
         <v-card class="elevation-12">
           <v-toolbar color="primary" dark>
             <v-toolbar-title>Entrar</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-progress-circular
+              indeterminate
+              width="2"
+              color="white"
+              v-show="isLoading"
+            ></v-progress-circular>
           </v-toolbar>
           <v-card-text>
             <v-form>
@@ -34,6 +41,19 @@
               >Login</v-btn
             >
           </v-card-actions>
+          <v-snackbar v-model="showSnackbar" top>
+            {{ error }}
+            <template v-slot:action="{ attrs }">
+              <v-btn
+                color="pink"
+                text
+                v-bind="attrs"
+                @click="showSnackbar = false"
+              >
+                Close
+              </v-btn>
+            </template>
+          </v-snackbar>
         </v-card>
       </v-flex>
     </v-layout>
@@ -42,7 +62,7 @@
 
 <script>
 import { required, minLength, email } from "vuelidate/lib/validators";
-import authService from './../services/'
+import authService from "./../services/";
 
 export default {
   name: "Login",
@@ -51,6 +71,9 @@ export default {
       email: "",
       password: "",
     },
+    isLoading: false,
+    error: undefined,
+    showSnackbar: false,
   }),
   validations: {
     user: {
@@ -90,13 +113,21 @@ export default {
     },
   },
   methods: {
-    submit() {
-      authService.login(this.user).then(response => {
-        console.log(response.data)
-      })
-    },
-    log() {
-      console.log("Vuelidate: ", this.$v);
+    async submit() {
+      this.isLoading = true;
+      try {
+        //await new Promise((resolve) => setTimeout(resolve, 3000));
+        await authService.login(this.user).then((response) => {
+          //console.log(response.data);
+          if (response.data.length == 0)
+            throw new Error("Email ou senha não encontrado.");
+        });
+      } catch (error) {
+        this.error = error.message;
+        this.showSnackbar = true;
+      } finally {
+        this.isLoading = false;
+      }
     },
   },
 };
