@@ -13,19 +13,27 @@
                 name="email"
                 label="Email"
                 type="email"
+                v-model.trim="$v.user.email.$model"
+                :error-messages="emailErrors"
+                :success="!$v.user.email.$invalid"
               ></v-text-field>
               <v-text-field
                 prepend-icon="mdi-lock"
                 name="password"
                 label="Senha"
                 type="password"
+                v-model.trim="$v.user.password.$model"
+                :error-messages="passwordErrors"
+                :success="!$v.user.password.$invalid"
               ></v-text-field>
             </v-form>
-            <v-btn block depressed> Criar Conta </v-btn>
+            <v-btn block depressed @click="log"> Criar Conta </v-btn>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" large>Login</v-btn>
+            <v-btn color="primary" large :disabled="$v.$invalid" @click="submit"
+              >Login</v-btn
+            >
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -34,7 +42,60 @@
 </template>
 
 <script>
+import { required, minLength, email } from "vuelidate/lib/validators";
+
 export default {
   name: "Login",
+  data: () => ({
+    user: {
+      email: "",
+      password: "",
+    },
+  }),
+  validations: {
+    user: {
+      email: {
+        required,
+        email,
+      },
+      password: {
+        required,
+        minLength: minLength(6),
+      },
+    },
+  },
+  computed: {
+    emailErrors() {
+      const errors = [];
+      const email = this.$v.user.email;
+      if (!email.$dirty) {
+        return errors;
+      }
+      !email.required && errors.push("Email é obrigatório!");
+      !email.email && errors.push("Insira um email válido!");
+      return errors;
+    },
+    passwordErrors() {
+      const errors = [];
+      const password = this.$v.user.password;
+      if (!password.$dirty) {
+        return errors;
+      }
+      !password.required && errors.push("Senha é obrigatória!");
+      !password.minLength &&
+        errors.push(
+          `Insira pelo menos ${password.$params.minLength.min} caracteres!`
+        );
+      return errors;
+    },
+  },
+  methods: {
+    submit() {
+      console.log("User: ", this.user);
+    },
+    log() {
+      console.log("Vuelidate: ", this.$v);
+    },
+  },
 };
 </script>
