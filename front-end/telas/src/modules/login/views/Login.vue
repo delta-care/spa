@@ -116,11 +116,11 @@ export default {
     async submit() {
       this.isLoading = true;
       try {
-        //await new Promise((resolve) => setTimeout(resolve, 3000));
         await authService.login(this.user).then((response) => {
-          //console.log(response.data);
-          if (response.data.length == 0)
-            throw new Error("Email ou senha não encontrado.");
+          if (response.data.length == 1)
+            this.$router.push('/painel');
+          else
+            throw new Error("Email e senha não coincidem.");
         });
       } catch (error) {
         this.error = error.message;

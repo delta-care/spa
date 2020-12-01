@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import AuthRouter from '@/modules/login/router'
+import PainelRouter from '@/modules/painel/router'
 
 Vue.use(VueRouter)
 
 const routes = [
     ...AuthRouter,
+    ...PainelRouter,
     { path: '/', redirect: '/login' }
 ]
 
