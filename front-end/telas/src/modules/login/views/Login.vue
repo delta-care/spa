@@ -25,28 +25,33 @@
                     v-model.trim="$v.user.email.$model"
                     :error-messages="emailErrors"
                     :success="!$v.user.email.$invalid"
+                    outlined
                   ></v-text-field>
                   <v-text-field
+                    :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                    :type="showPassword ? 'text' : 'password'"
+                    @click:append="showPassword = !showPassword"
                     prepend-icon="mdi-lock"
                     name="password"
                     label="Senha"
-                    type="password"
                     v-model.trim="$v.user.password.$model"
                     :error-messages="passwordErrors"
                     :success="!$v.user.password.$invalid"
+                    outlined
                   ></v-text-field>
+                  <v-row style="margin-right:0px">
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="primary"
+                      large
+                      :disabled="$v.$invalid"
+                      @click="submit"
+                      >Login</v-btn
+                    >
+                  </v-row>
                 </v-form>
               </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn
-                  color="primary"
-                  large
-                  :disabled="$v.$invalid"
-                  @click="submit"
-                  >Login</v-btn
-                >
-              </v-card-actions>
+
               <v-snackbar v-model="showSnackbar" top>
                 {{ error }}
                 <template v-slot:action="{ attrs }">
@@ -82,6 +87,7 @@ export default {
     isLoading: false,
     error: undefined,
     showSnackbar: false,
+    showPassword: false,
   }),
   validations: {
     user: {
