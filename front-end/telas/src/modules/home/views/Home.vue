@@ -1,14 +1,12 @@
 <template>
-  <app-layout />
+  <h1>Home</h1>
 </template>
 
 <script>
-import AppLayout from './../components/AppLayout';
 
 export default {
   name: 'Painel',
   components: {
-    AppLayout
   }
 }
 </script>
