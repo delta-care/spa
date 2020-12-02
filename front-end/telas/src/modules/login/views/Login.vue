@@ -117,16 +117,18 @@ export default {
       this.isLoading = true;
       try {
         await authService.login(this.user).then((response) => {
-          if (response.data.length == 1)
-            this.$router.push('/painel');
-          else
-            throw new Error("Email e senha não coincidem.");
+          if (response.data.length == 1) {
+            localStorage.setItem('token', response.data[0].token)
+            this.$router.push(this.$route.query.redirect || "/painel")
+          } else {
+            throw new Error("Email e senha não coincidem.")
+          }
         });
       } catch (error) {
         this.error = error.message;
-        this.showSnackbar = true;
+        this.showSnackbar = true
       } finally {
-        this.isLoading = false;
+        this.isLoading = false
       }
     },
   },

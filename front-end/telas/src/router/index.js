@@ -1,20 +1,48 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import AuthRouter from '@/modules/login/router'
+import LoginRouter from '@/modules/login/router'
 import PainelRouter from '@/modules/painel/router'
+import LoginService from '@/modules/login/services'
 
 Vue.use(VueRouter)
 
 const routes = [
-    ...AuthRouter,
-    ...PainelRouter,
-    { path: '/', redirect: '/login' }
+  ...LoginRouter,
+  ...PainelRouter,
+  { path: '/', redirect: '/login' }
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach(async (to, from, next) => {
+  if (to.matched.some(route => route.meta.requiresLogin)) {
+    const token = window.localStorage.getItem('token')
+    const loginRoute = {
+      path: '/login',
+      query: { redirect: to.fullPath }
+    }
+    if (token) {
+      LoginService.obterUsuarioPorToken(token)
+        .then((response) => {
+          if (response.data.length == 1) {
+            return next()
+          } else {
+            return next(loginRoute)
+          }
+        })
+        .catch(function (err) {
+          console.log('Auto Login Error: ', err)
+          return next(loginRoute)
+        });
+    } else {
+      return next(loginRoute)
+    }
+  }
+  next()
 })
 
 export default router

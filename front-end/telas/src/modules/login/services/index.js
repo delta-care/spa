@@ -16,6 +16,14 @@ function login(usuario) {
   return apiClient.get('/usuarios/', { params })
 }
 
+function obterUsuarioPorToken(token) {
+  const params = {
+    token: token,
+  }
+  return apiClient.get('/usuarios/', { params })
+}
+
 export default {
-  login
+  login,
+  obterUsuarioPorToken
 }
