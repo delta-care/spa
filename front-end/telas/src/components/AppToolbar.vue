@@ -10,7 +10,7 @@
 
     <v-divider class="mx-4" vertical></v-divider>
 
-    <span class="subheading">Painel</span>
+    <span class="subheading"></span>
 
     <v-spacer></v-spacer>
 
