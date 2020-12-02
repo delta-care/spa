@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LoginRouter from '@/modules/login/router'
 import HomeRouter from '@/modules/home/router'
+import EmpresaRouter from '@/modules/empresa/router'
 import LoginService from '@/modules/login/services'
 
 Vue.use(VueRouter)
@@ -9,6 +10,7 @@ Vue.use(VueRouter)
 const routes = [
   ...LoginRouter,
   ...HomeRouter,
+  ...EmpresaRouter,
   { path: '/', redirect: '/login' }
 ]
 
