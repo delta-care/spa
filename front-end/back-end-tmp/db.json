@@ -4,13 +4,15 @@
       "id": 1,
       "email": "maria.almeida@gmail.com",
       "nome": "Maria Almeida",
-      "password": 123456
+      "password": 123456,
+      "token": "111abc"
     },
     {
       "id": 2,
       "email": "jose.souza@gmail.com",
       "nome": "José Souza",
-      "password": 234567
+      "password": 234567,
+      "token": "222xyz"
     }
   ]
 }

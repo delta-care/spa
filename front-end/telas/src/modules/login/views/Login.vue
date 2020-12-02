@@ -127,7 +127,7 @@ export default {
         await authService.login(this.user).then((response) => {
           if (response.data.length == 1) {
             localStorage.setItem("token", response.data[0].token);
-            this.$router.push(this.$route.query.redirect || "/painel");
+            this.$router.push(this.$route.query.redirect || "/home");
           } else {
             throw new Error("Email e senha não coincidem.");
           }

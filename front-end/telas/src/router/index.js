@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LoginRouter from '@/modules/login/router'
-import PainelRouter from '@/modules/painel/router'
+import HomeRouter from '@/modules/home/router'
 import LoginService from '@/modules/login/services'
 
 Vue.use(VueRouter)
 
 const routes = [
   ...LoginRouter,
-  ...PainelRouter,
+  ...HomeRouter,
   { path: '/', redirect: '/login' }
 ]
 
