@@ -1,0 +1,42 @@
+<template>
+  <v-app-bar
+    app
+    flat="true"
+    height="57px"
+    color="#fff"
+    style="border: 1px solid rgba(0, 0, 0, 0.12)"
+  >
+    <v-toolbar-title> DeltaCare</v-toolbar-title>
+
+    <v-divider class="mx-4" vertical></v-divider>
+
+    <span class="subheading">Painel</span>
+
+    <v-spacer></v-spacer>
+
+    <v-btn icon>
+      <v-icon>mdi-magnify</v-icon>
+    </v-btn>
+
+    <v-btn icon>
+      <v-icon>mdi-heart</v-icon>
+    </v-btn>
+
+    <v-btn icon>
+      <v-icon>mdi-dots-vertical</v-icon>
+    </v-btn>
+  </v-app-bar>
+</template>
+
+<script>
+export default {
+  name: "AppToolbar",
+  props: {
+    show: Boolean,
+  },
+  model: {
+    prop: "show",
+    event: "hide",
+  },
+};
+</script>

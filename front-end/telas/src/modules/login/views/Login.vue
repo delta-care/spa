@@ -1,63 +1,71 @@
 <template>
-  <v-container fill-height>
-    <v-layout justify-center align-center>
-      <v-flex xs12 sm6 md4 lg3 x13>
-        <v-card class="elevation-12">
-          <v-toolbar color="primary" dark>
-            <v-toolbar-title>Entrar</v-toolbar-title>
-            <v-spacer></v-spacer>
-            <v-progress-circular
-              indeterminate
-              width="2"
-              color="white"
-              v-show="isLoading"
-            ></v-progress-circular>
-          </v-toolbar>
-          <v-card-text>
-            <v-form>
-              <v-text-field
-                prepend-icon="mdi-email"
-                name="email"
-                label="Email"
-                type="email"
-                v-model.trim="$v.user.email.$model"
-                :error-messages="emailErrors"
-                :success="!$v.user.email.$invalid"
-              ></v-text-field>
-              <v-text-field
-                prepend-icon="mdi-lock"
-                name="password"
-                label="Senha"
-                type="password"
-                v-model.trim="$v.user.password.$model"
-                :error-messages="passwordErrors"
-                :success="!$v.user.password.$invalid"
-              ></v-text-field>
-            </v-form>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" large :disabled="$v.$invalid" @click="submit"
-              >Login</v-btn
-            >
-          </v-card-actions>
-          <v-snackbar v-model="showSnackbar" top>
-            {{ error }}
-            <template v-slot:action="{ attrs }">
-              <v-btn
-                color="pink"
-                text
-                v-bind="attrs"
-                @click="showSnackbar = false"
-              >
-                Close
-              </v-btn>
-            </template>
-          </v-snackbar>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <v-app>
+    <v-main>
+      <v-container fill-height>
+        <v-layout justify-center align-center>
+          <v-flex xs12 sm6 md4 lg3 x13>
+            <v-card class="elevation-12">
+              <v-toolbar color="primary" dark>
+                <v-toolbar-title>Entrar</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-progress-circular
+                  indeterminate
+                  width="2"
+                  color="white"
+                  v-show="isLoading"
+                ></v-progress-circular>
+              </v-toolbar>
+              <v-card-text>
+                <v-form>
+                  <v-text-field
+                    prepend-icon="mdi-email"
+                    name="email"
+                    label="Email"
+                    type="email"
+                    v-model.trim="$v.user.email.$model"
+                    :error-messages="emailErrors"
+                    :success="!$v.user.email.$invalid"
+                  ></v-text-field>
+                  <v-text-field
+                    prepend-icon="mdi-lock"
+                    name="password"
+                    label="Senha"
+                    type="password"
+                    v-model.trim="$v.user.password.$model"
+                    :error-messages="passwordErrors"
+                    :success="!$v.user.password.$invalid"
+                  ></v-text-field>
+                </v-form>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="primary"
+                  large
+                  :disabled="$v.$invalid"
+                  @click="submit"
+                  >Login</v-btn
+                >
+              </v-card-actions>
+              <v-snackbar v-model="showSnackbar" top>
+                {{ error }}
+                <template v-slot:action="{ attrs }">
+                  <v-btn
+                    color="pink"
+                    text
+                    v-bind="attrs"
+                    @click="showSnackbar = false"
+                  >
+                    Close
+                  </v-btn>
+                </template>
+              </v-snackbar>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
@@ -118,17 +126,17 @@ export default {
       try {
         await authService.login(this.user).then((response) => {
           if (response.data.length == 1) {
-            localStorage.setItem('token', response.data[0].token)
-            this.$router.push(this.$route.query.redirect || "/painel")
+            localStorage.setItem("token", response.data[0].token);
+            this.$router.push(this.$route.query.redirect || "/painel");
           } else {
-            throw new Error("Email e senha não coincidem.")
+            throw new Error("Email e senha não coincidem.");
           }
         });
       } catch (error) {
         this.error = error.message;
-        this.showSnackbar = true
+        this.showSnackbar = true;
       } finally {
-        this.isLoading = false
+        this.isLoading = false;
       }
     },
   },

@@ -1,5 +1,14 @@
 <template>
-  <v-container>
-    <h1>Bem vindo(a) ao painel</h1>
-  </v-container>
+  <app-layout />
 </template>
+
+<script>
+import AppLayout from './../components/AppLayout';
+
+export default {
+  name: 'Painel',
+  components: {
+    AppLayout
+  }
+}
+</script>
