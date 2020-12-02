@@ -1,7 +1,7 @@
 <template>
   <v-app-bar
     app
-    flat="true"
+    flat
     height="57px"
     color="#fff"
     style="border: 1px solid rgba(0, 0, 0, 0.12)"
