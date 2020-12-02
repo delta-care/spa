@@ -6,19 +6,10 @@
       <v-container>
         <v-row>
           <v-col cols="12" sm="2">
-            <v-text-field
-              label="Código"
-              outlined
-              disabled
-            ></v-text-field>
+            <v-text-field label="Código" outlined disabled></v-text-field>
           </v-col>
-
           <v-col cols="12" sm="6">
-            <v-text-field
-              label="Nome"
-              outlined
-              disabled
-            ></v-text-field>
+            <v-text-field label="Nome" outlined disabled></v-text-field>
           </v-col>
           <v-col cols="12" sm="2">
             <v-menu
@@ -30,7 +21,6 @@
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
-                  v-model="dateFormatted"
                   label="Data Admissão"
                   persistent-hint
                   v-bind="attrs"
@@ -48,10 +38,7 @@
             </v-menu>
           </v-col>
           <v-col cols="12" sm="2">
-            <v-text-field
-              label="Filial"
-              outlined
-            ></v-text-field>
+            <v-combobox outlined disabled label="Filial"></v-combobox>
           </v-col>
         </v-row>
         <v-card>
@@ -119,7 +106,6 @@ export default {
   methods: {
     formatDate(date) {
       if (!date) return null;
-
       const [year, month, day] = date.split("-");
       return `${day}/${month}/${year}`;
     },
