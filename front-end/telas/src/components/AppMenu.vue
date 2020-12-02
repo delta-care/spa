@@ -15,7 +15,7 @@
     <v-divider></v-divider>
 
     <v-list>
-      <v-list-item v-for="item in items" :key="item.title" link>
+      <v-list-item v-for="item in items" :key="item.title" link :to="item.path">
         <v-list-item-icon>
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-icon>
@@ -34,8 +34,8 @@ export default {
   data: () => ({
     mini: true,
     items: [
-      { title: "Home", icon: "mdi-view-dashboard", url: "/home" },
-      { title: "Empresa", icon: "mdi-domain", url: "/empresa" },
+      { title: "Home", icon: "mdi-view-dashboard", path: "/home", exact: true },
+      { title: "Empresa", icon: "mdi-domain", path: "/empresa", exact: true },
     ],
   }),
 };
