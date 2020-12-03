@@ -64,7 +64,7 @@
                             disabled
                         ></v-text-field>
                     </v-col>
-                    <v-col cols="12" sm="6">
+                    <v-col cols="12" sm="5">
                         <v-text-field
                             label="Nome"
                             outlined
@@ -110,6 +110,16 @@
                             disabled
                             label="Filial"
                         ></v-combobox>
+                    </v-col>
+                    <v-col cols="12" sm="1">
+                        <v-btn
+                            color="primary"
+                            fab
+                            hide-details="auto"
+                            @click="editar()"
+                        >
+                            <v-icon> mdi-account-plus </v-icon></v-btn
+                        >
                     </v-col>
                 </v-row>
                 <v-card>
