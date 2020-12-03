@@ -126,418 +126,455 @@
                     </v-col>
                 </v-row>
                 -->
-                <v-card>
-                    <v-tabs v-model="tab" background-color="primary" dark>
-                        <v-tab key="Dados Básicos"> Dados Básicos </v-tab>
-                        <v-tab key="Produtos e Coberturas">
-                            Produtos e Coberturas
-                        </v-tab>
-                    </v-tabs>
-                    <v-tabs-items v-model="tab">
-                        <v-tab-item key="Dados Básicos">
-                            <v-card>
-                                <v-card-text>
-                                    <v-row>
-                                        <v-col cols="12" sm="2">
-                                            <v-text-field
-                                                label="Código"
-                                                outlined
-                                                hide-details="auto"
-                                                v-model="empresa.id"
-                                            ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="4">
-                                            <v-text-field
-                                                label="CNPJ"
-                                                outlined
-                                                hide-details="auto"
-                                                v-model="empresa.cnpj"
-                                            ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="2">
-                                            <v-menu
-                                                ref="menuDataAdmissao2"
-                                                v-model="menuDataAdmissao2"
-                                                :close-on-content-click="false"
-                                                transition="scale-transition"
-                                                offset-y
-                                                max-width="290px"
-                                                min-width="290px"
-                                            >
-                                                <template
-                                                    v-slot:activator="{
-                                                        on,
-                                                        attrs,
-                                                    }"
-                                                >
+                <v-row>
+                    <v-col cols="12" sm="12">
+                        <v-card>
+                            <v-tabs
+                                v-model="tab"
+                                background-color="primary"
+                                dark
+                            >
+                                <v-tab key="Dados Básicos">
+                                    Dados Básicos
+                                </v-tab>
+                                <v-tab key="Produtos e Coberturas">
+                                    Produtos e Coberturas
+                                </v-tab>
+                            </v-tabs>
+                            <v-tabs-items v-model="tab">
+                                <v-tab-item key="Dados Básicos">
+                                    <v-card>
+                                        <v-card-text>
+                                            <v-row>
+                                                <v-col cols="12" sm="2">
                                                     <v-text-field
+                                                        label="Código"
+                                                        outlined
+                                                        hide-details="auto"
+                                                        v-model="empresa.id"
+                                                    ></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" sm="4">
+                                                    <v-text-field
+                                                        label="CNPJ"
+                                                        outlined
+                                                        hide-details="auto"
+                                                        v-model="empresa.cnpj"
+                                                    ></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" sm="2">
+                                                    <v-menu
+                                                        ref="menuDataAdmissao2"
                                                         v-model="
-                                                            dataAdmissaoFormatada2
+                                                            menuDataAdmissao2
                                                         "
-                                                        label="Data Admissão"
-                                                        persistent-hint
-                                                        v-bind="attrs"
-                                                        @blur="
-                                                            dataAdmissao2 = parseDate(
-                                                                dataAdmissaoFormatada2
-                                                            )
+                                                        :close-on-content-click="
+                                                            false
                                                         "
-                                                        v-on="on"
+                                                        transition="scale-transition"
+                                                        offset-y
+                                                        max-width="290px"
+                                                        min-width="290px"
+                                                    >
+                                                        <template
+                                                            v-slot:activator="{
+                                                                on,
+                                                                attrs,
+                                                            }"
+                                                        >
+                                                            <v-text-field
+                                                                v-model="
+                                                                    dataAdmissaoFormatada2
+                                                                "
+                                                                label="Data Admissão"
+                                                                persistent-hint
+                                                                v-bind="attrs"
+                                                                @blur="
+                                                                    dataAdmissao2 = parseDate(
+                                                                        dataAdmissaoFormatada2
+                                                                    )
+                                                                "
+                                                                v-on="on"
+                                                                outlined
+                                                                hide-details="auto"
+                                                            ></v-text-field>
+                                                        </template>
+                                                        <v-date-picker
+                                                            v-model="
+                                                                dataAdmissao2
+                                                            "
+                                                            no-title
+                                                            @input="
+                                                                menuDataAdmissao2 = false
+                                                            "
+                                                        ></v-date-picker>
+                                                    </v-menu>
+                                                </v-col>
+                                                <v-col cols="12" sm="2">
+                                                    <v-combobox
+                                                        outlined
+                                                        label="Filial Cont."
+                                                        hide-details="auto"
+                                                    ></v-combobox>
+                                                </v-col>
+                                                <v-col cols="12" sm="2">
+                                                    <v-combobox
+                                                        outlined
+                                                        label="Administ."
+                                                        hide-details="auto"
+                                                    ></v-combobox>
+                                                </v-col>
+                                            </v-row>
+                                            <v-row>
+                                                <v-col cols="12" sm="4">
+                                                    <v-text-field
+                                                        label="Nome"
+                                                        outlined
+                                                        hide-details="auto"
+                                                        v-model="empresa.nome"
+                                                    ></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" sm="2">
+                                                    <v-combobox
+                                                        outlined
+                                                        label="UF"
+                                                        hide-details="auto"
+                                                    ></v-combobox>
+                                                </v-col>
+                                                <v-col cols="12" sm="3">
+                                                    <v-text-field
+                                                        label="C.E.I"
                                                         outlined
                                                         hide-details="auto"
                                                     ></v-text-field>
-                                                </template>
-                                                <v-date-picker
-                                                    v-model="dataAdmissao2"
-                                                    no-title
-                                                    @input="
-                                                        menuDataAdmissao2 = false
-                                                    "
-                                                ></v-date-picker>
-                                            </v-menu>
-                                        </v-col>
-                                        <v-col cols="12" sm="2">
-                                            <v-combobox
-                                                outlined
-                                                label="Filial Cont."
-                                                hide-details="auto"
-                                            ></v-combobox>
-                                        </v-col>
-                                        <v-col cols="12" sm="2">
-                                            <v-combobox
-                                                outlined
-                                                label="Administ."
-                                                hide-details="auto"
-                                            ></v-combobox>
-                                        </v-col>
-                                    </v-row>
-                                    <v-row>
-                                        <v-col cols="12" sm="4">
-                                            <v-text-field
-                                                label="Nome"
-                                                outlined
-                                                hide-details="auto"
-                                                v-model="empresa.nome"
-                                            ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="2">
-                                            <v-combobox
-                                                outlined
-                                                label="UF"
-                                                hide-details="auto"
-                                            ></v-combobox>
-                                        </v-col>
-                                        <v-col cols="12" sm="3">
-                                            <v-text-field
-                                                label="C.E.I"
-                                                outlined
-                                                hide-details="auto"
-                                            ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="3">
-                                            <v-text-field
-                                                label="Inscrição Municipal"
-                                                outlined
-                                                hide-details="auto"
-                                            ></v-text-field>
-                                        </v-col>
-                                    </v-row>
-                                    <v-row>
-                                        <v-col cols="12" sm="2">
-                                            <v-text-field
-                                                label="CEP"
-                                                outlined
-                                                hide-details="auto"
-                                            ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="4">
-                                            <v-text-field
-                                                label="Logradouro"
-                                                outlined
-                                                hide-details="auto"
-                                            ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="3">
-                                            <v-text-field
-                                                label="Bairro"
-                                                outlined
-                                                hide-details="auto"
-                                            ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="3">
-                                            <v-text-field
-                                                label="Email"
-                                                outlined
-                                                hide-details="auto"
-                                            ></v-text-field>
-                                        </v-col>
-                                    </v-row>
-                                </v-card-text>
-                                <v-divider></v-divider>
-                                <v-card-actions>
-                                    <v-row class="mt-2 ml-2 pb-2">
-                                        <v-btn
-                                            color="primary"
-                                            :loading="salvando"
-                                            @click="alterar()"
-                                        >
-                                            <v-icon left> mdi-pencil </v-icon
-                                            >Alterar
-                                        </v-btn>
-                                        <v-btn
-                                            class="ml-2"
-                                            color="primary"
-                                            :loading="adicionando"
-                                            @click="adicionar()"
-                                        >
-                                            <v-icon left> mdi-plus </v-icon
-                                            >Adicionar</v-btn
-                                        >
-                                        <v-btn
-                                            class="ml-2"
-                                            color="primary"
-                                            :loading="excluindo"
-                                            @click="excluir()"
-                                        >
-                                            <v-icon left> mdi-delete </v-icon
-                                            >Excluir</v-btn
-                                        >
-                                    </v-row>
-                                </v-card-actions>
-                            </v-card>
-                        </v-tab-item>
-                        <v-tab-item key="Produtos e Coberturas">
-                            <v-card>
-                                <v-card-text class="pt-6">
-                                    <h2>Produto</h2>
-                                    <v-divider class="mt-2"></v-divider>
-                                    <v-row class="mt-2">
-                                        <v-col cols="12" sm="3">
-                                            <v-combobox
-                                                outlined
-                                                label="Plano"
-                                                hide-details="auto"
-                                            ></v-combobox>
-                                        </v-col>
-                                        <v-col cols="12" sm="3">
-                                            <v-combobox
-                                                outlined
-                                                label="Plano"
-                                                hide-details="auto"
-                                            ></v-combobox>
-                                        </v-col>
-                                        <v-col cols="12" sm="2">
-                                            <v-combobox
-                                                outlined
-                                                label="Versão"
-                                                hide-details="auto"
-                                            ></v-combobox>
-                                        </v-col>
-                                        <v-col cols="12" sm="2">
-                                            <v-menu
-                                                ref="dataVigenciaInicioMenu"
-                                                v-model="dataVigenciaInicioMenu"
-                                                :close-on-content-click="false"
-                                                transition="scale-transition"
-                                                offset-y
-                                                max-width="290px"
-                                                min-width="290px"
-                                            >
-                                                <template
-                                                    v-slot:activator="{
-                                                        on,
-                                                        attrs,
-                                                    }"
-                                                >
+                                                </v-col>
+                                                <v-col cols="12" sm="3">
                                                     <v-text-field
-                                                        v-model="
-                                                            dataVigenciaInicioFormatada
-                                                        "
-                                                        label="Início de Vigência"
-                                                        persistent-hint
-                                                        v-bind="attrs"
-                                                        @blur="
-                                                            dataVigenciaInicio = parseDate(
-                                                                dataVigenciaInicioFormatada
-                                                            )
-                                                        "
-                                                        v-on="on"
+                                                        label="Inscrição Municipal"
                                                         outlined
+                                                        hide-details="auto"
                                                     ></v-text-field>
-                                                </template>
-                                                <v-date-picker
-                                                    v-model="dataVigenciaInicio"
-                                                    no-title
-                                                    @input="
-                                                        dataVigenciaInicioMenu = false
-                                                    "
-                                                ></v-date-picker>
-                                            </v-menu>
-                                        </v-col>
-                                        <v-col cols="12" sm="2">
-                                            <v-menu
-                                                ref="dataVigenciaFimMenu"
-                                                v-model="dataVigenciaFimMenu"
-                                                :close-on-content-click="false"
-                                                transition="scale-transition"
-                                                offset-y
-                                                max-width="290px"
-                                                min-width="290px"
-                                            >
-                                                <template
-                                                    v-slot:activator="{
-                                                        on,
-                                                        attrs,
-                                                    }"
-                                                >
+                                                </v-col>
+                                            </v-row>
+                                            <v-row>
+                                                <v-col cols="12" sm="2">
                                                     <v-text-field
-                                                        v-model="
-                                                            dataVigenciaFimFormatada
-                                                        "
-                                                        label="Fim de Vigência"
-                                                        persistent-hint
-                                                        v-bind="attrs"
-                                                        @blur="
-                                                            dataVigenciaFim = parseDate(
-                                                                dataVigenciaFimFormatada
-                                                            )
-                                                        "
-                                                        v-on="on"
+                                                        label="CEP"
                                                         outlined
+                                                        hide-details="auto"
                                                     ></v-text-field>
-                                                </template>
-                                                <v-date-picker
-                                                    v-model="dataVigenciaFim"
-                                                    no-title
-                                                    @input="
-                                                        dataVigenciaFimMenu = false
-                                                    "
-                                                ></v-date-picker>
-                                            </v-menu>
-                                        </v-col>
-                                    </v-row>
+                                                </v-col>
+                                                <v-col cols="12" sm="4">
+                                                    <v-text-field
+                                                        label="Logradouro"
+                                                        outlined
+                                                        hide-details="auto"
+                                                    ></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" sm="3">
+                                                    <v-text-field
+                                                        label="Bairro"
+                                                        outlined
+                                                        hide-details="auto"
+                                                    ></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" sm="3">
+                                                    <v-text-field
+                                                        label="Email"
+                                                        outlined
+                                                        hide-details="auto"
+                                                    ></v-text-field>
+                                                </v-col>
+                                            </v-row>
+                                        </v-card-text>
+                                        <v-divider></v-divider>
+                                        <v-card-actions>
+                                            <v-row class="mt-2 ml-2 pb-2">
+                                                <v-btn
+                                                    color="primary"
+                                                    :loading="salvando"
+                                                    @click="alterar()"
+                                                >
+                                                    <v-icon left>
+                                                        mdi-pencil </v-icon
+                                                    >Alterar
+                                                </v-btn>
+                                                <v-btn
+                                                    class="ml-2"
+                                                    color="primary"
+                                                    :loading="adicionando"
+                                                    @click="adicionar()"
+                                                >
+                                                    <v-icon left>
+                                                        mdi-plus </v-icon
+                                                    >Adicionar</v-btn
+                                                >
+                                                <v-btn
+                                                    class="ml-2"
+                                                    color="primary"
+                                                    :loading="excluindo"
+                                                    @click="excluir()"
+                                                >
+                                                    <v-icon left>
+                                                        mdi-delete </v-icon
+                                                    >Excluir</v-btn
+                                                >
+                                            </v-row>
+                                        </v-card-actions>
+                                    </v-card>
+                                </v-tab-item>
+                                <v-tab-item key="Produtos e Coberturas">
+                                    <v-card>
+                                        <v-card-text class="pt-6">
+                                            <h2>Produto</h2>
+                                            <v-divider class="mt-2"></v-divider>
+                                            <v-row class="mt-2">
+                                                <v-col cols="12" sm="3">
+                                                    <v-combobox
+                                                        outlined
+                                                        label="Plano"
+                                                        hide-details="auto"
+                                                    ></v-combobox>
+                                                </v-col>
+                                                <v-col cols="12" sm="3">
+                                                    <v-combobox
+                                                        outlined
+                                                        label="Plano"
+                                                        hide-details="auto"
+                                                    ></v-combobox>
+                                                </v-col>
+                                                <v-col cols="12" sm="2">
+                                                    <v-combobox
+                                                        outlined
+                                                        label="Versão"
+                                                        hide-details="auto"
+                                                    ></v-combobox>
+                                                </v-col>
+                                                <v-col cols="12" sm="2">
+                                                    <v-menu
+                                                        ref="dataVigenciaInicioMenu"
+                                                        v-model="
+                                                            dataVigenciaInicioMenu
+                                                        "
+                                                        :close-on-content-click="
+                                                            false
+                                                        "
+                                                        transition="scale-transition"
+                                                        offset-y
+                                                        max-width="290px"
+                                                        min-width="290px"
+                                                    >
+                                                        <template
+                                                            v-slot:activator="{
+                                                                on,
+                                                                attrs,
+                                                            }"
+                                                        >
+                                                            <v-text-field
+                                                                v-model="
+                                                                    dataVigenciaInicioFormatada
+                                                                "
+                                                                label="Início de Vigência"
+                                                                persistent-hint
+                                                                v-bind="attrs"
+                                                                @blur="
+                                                                    dataVigenciaInicio = parseDate(
+                                                                        dataVigenciaInicioFormatada
+                                                                    )
+                                                                "
+                                                                v-on="on"
+                                                                outlined
+                                                            ></v-text-field>
+                                                        </template>
+                                                        <v-date-picker
+                                                            v-model="
+                                                                dataVigenciaInicio
+                                                            "
+                                                            no-title
+                                                            @input="
+                                                                dataVigenciaInicioMenu = false
+                                                            "
+                                                        ></v-date-picker>
+                                                    </v-menu>
+                                                </v-col>
+                                                <v-col cols="12" sm="2">
+                                                    <v-menu
+                                                        ref="dataVigenciaFimMenu"
+                                                        v-model="
+                                                            dataVigenciaFimMenu
+                                                        "
+                                                        :close-on-content-click="
+                                                            false
+                                                        "
+                                                        transition="scale-transition"
+                                                        offset-y
+                                                        max-width="290px"
+                                                        min-width="290px"
+                                                    >
+                                                        <template
+                                                            v-slot:activator="{
+                                                                on,
+                                                                attrs,
+                                                            }"
+                                                        >
+                                                            <v-text-field
+                                                                v-model="
+                                                                    dataVigenciaFimFormatada
+                                                                "
+                                                                label="Fim de Vigência"
+                                                                persistent-hint
+                                                                v-bind="attrs"
+                                                                @blur="
+                                                                    dataVigenciaFim = parseDate(
+                                                                        dataVigenciaFimFormatada
+                                                                    )
+                                                                "
+                                                                v-on="on"
+                                                                outlined
+                                                            ></v-text-field>
+                                                        </template>
+                                                        <v-date-picker
+                                                            v-model="
+                                                                dataVigenciaFim
+                                                            "
+                                                            no-title
+                                                            @input="
+                                                                dataVigenciaFimMenu = false
+                                                            "
+                                                        ></v-date-picker>
+                                                    </v-menu>
+                                                </v-col>
+                                            </v-row>
 
-                                    <h2>Coberturas</h2>
-                                    <v-divider class="mt-2"></v-divider>
-                                    <v-row class="mt-2">
-                                        <v-col cols="12" sm="6">
-                                            <v-combobox
-                                                outlined
-                                                label="Benefício"
-                                                hide-details="auto"
-                                            ></v-combobox>
-                                        </v-col>
-                                        <v-col cols="12" sm="2">
-                                            <v-menu
-                                                ref="dataVigenciaInicioCoberturaMenu"
-                                                v-model="
-                                                    dataVigenciaInicioCoberturaMenu
-                                                "
-                                                :close-on-content-click="false"
-                                                transition="scale-transition"
-                                                offset-y
-                                                max-width="290px"
-                                                min-width="290px"
-                                            >
-                                                <template
-                                                    v-slot:activator="{
-                                                        on,
-                                                        attrs,
-                                                    }"
-                                                >
-                                                    <v-text-field
+                                            <h2>Coberturas</h2>
+                                            <v-divider class="mt-2"></v-divider>
+                                            <v-row class="mt-2">
+                                                <v-col cols="12" sm="6">
+                                                    <v-combobox
+                                                        outlined
+                                                        label="Benefício"
+                                                        hide-details="auto"
+                                                    ></v-combobox>
+                                                </v-col>
+                                                <v-col cols="12" sm="2">
+                                                    <v-menu
+                                                        ref="dataVigenciaInicioCoberturaMenu"
                                                         v-model="
-                                                            dataVigenciaInicioCoberturaFormatada
+                                                            dataVigenciaInicioCoberturaMenu
                                                         "
-                                                        label="Início de Vigência"
-                                                        persistent-hint
-                                                        v-bind="attrs"
-                                                        @blur="
-                                                            dataVigenciaInicioCobertura = parseDate(
-                                                                dataVigenciaInicioCoberturaFormatada
-                                                            )
+                                                        :close-on-content-click="
+                                                            false
                                                         "
-                                                        v-on="on"
+                                                        transition="scale-transition"
+                                                        offset-y
+                                                        max-width="290px"
+                                                        min-width="290px"
+                                                    >
+                                                        <template
+                                                            v-slot:activator="{
+                                                                on,
+                                                                attrs,
+                                                            }"
+                                                        >
+                                                            <v-text-field
+                                                                v-model="
+                                                                    dataVigenciaInicioCoberturaFormatada
+                                                                "
+                                                                label="Início de Vigência"
+                                                                persistent-hint
+                                                                v-bind="attrs"
+                                                                @blur="
+                                                                    dataVigenciaInicioCobertura = parseDate(
+                                                                        dataVigenciaInicioCoberturaFormatada
+                                                                    )
+                                                                "
+                                                                v-on="on"
+                                                                outlined
+                                                                hide-details="auto"
+                                                            ></v-text-field>
+                                                        </template>
+                                                        <v-date-picker
+                                                            v-model="
+                                                                dataVigenciaInicioCobertura
+                                                            "
+                                                            no-title
+                                                            @input="
+                                                                dataVigenciaInicioCoberturaMenu = false
+                                                            "
+                                                        ></v-date-picker>
+                                                    </v-menu>
+                                                </v-col>
+                                                <v-col cols="12" sm="2">
+                                                    <v-menu
+                                                        ref="dataVigenciaFimCoberturaMenu"
+                                                        v-model="
+                                                            dataVigenciaFimCoberturaMenu
+                                                        "
+                                                        :close-on-content-click="
+                                                            false
+                                                        "
+                                                        transition="scale-transition"
+                                                        offset-y
+                                                        max-width="290px"
+                                                        min-width="290px"
+                                                    >
+                                                        <template
+                                                            v-slot:activator="{
+                                                                on,
+                                                                attrs,
+                                                            }"
+                                                        >
+                                                            <v-text-field
+                                                                v-model="
+                                                                    dataVigenciaFimCoberturaFormatada
+                                                                "
+                                                                label="Fim de Vigência"
+                                                                persistent-hint
+                                                                v-bind="attrs"
+                                                                @blur="
+                                                                    dataVigenciaFimCobertura = parseDate(
+                                                                        dataVigenciaFimCoberturaFormatada
+                                                                    )
+                                                                "
+                                                                v-on="on"
+                                                                outlined
+                                                                hide-details="auto"
+                                                            ></v-text-field>
+                                                        </template>
+                                                        <v-date-picker
+                                                            v-model="
+                                                                dataVigenciaFimCobertura
+                                                            "
+                                                            no-title
+                                                            @input="
+                                                                dataVigenciaFimCoberturaMenu = false
+                                                            "
+                                                        ></v-date-picker>
+                                                    </v-menu>
+                                                </v-col>
+                                                <v-col cols="12" sm="2">
+                                                    <v-text-field
+                                                        label="Valor"
                                                         outlined
                                                         hide-details="auto"
                                                     ></v-text-field>
-                                                </template>
-                                                <v-date-picker
-                                                    v-model="
-                                                        dataVigenciaInicioCobertura
-                                                    "
-                                                    no-title
-                                                    @input="
-                                                        dataVigenciaInicioCoberturaMenu = false
-                                                    "
-                                                ></v-date-picker>
-                                            </v-menu>
-                                        </v-col>
-                                        <v-col cols="12" sm="2">
-                                            <v-menu
-                                                ref="dataVigenciaFimCoberturaMenu"
-                                                v-model="
-                                                    dataVigenciaFimCoberturaMenu
-                                                "
-                                                :close-on-content-click="false"
-                                                transition="scale-transition"
-                                                offset-y
-                                                max-width="290px"
-                                                min-width="290px"
-                                            >
-                                                <template
-                                                    v-slot:activator="{
-                                                        on,
-                                                        attrs,
-                                                    }"
+                                                </v-col>
+                                            </v-row>
+                                        </v-card-text>
+                                        <v-divider></v-divider>
+                                        <v-card-actions>
+                                            <v-row class="mt-2 ml-2 pb-2">
+                                                <v-btn color="primary"
+                                                    >Salvar</v-btn
                                                 >
-                                                    <v-text-field
-                                                        v-model="
-                                                            dataVigenciaFimCoberturaFormatada
-                                                        "
-                                                        label="Fim de Vigência"
-                                                        persistent-hint
-                                                        v-bind="attrs"
-                                                        @blur="
-                                                            dataVigenciaFimCobertura = parseDate(
-                                                                dataVigenciaFimCoberturaFormatada
-                                                            )
-                                                        "
-                                                        v-on="on"
-                                                        outlined
-                                                        hide-details="auto"
-                                                    ></v-text-field>
-                                                </template>
-                                                <v-date-picker
-                                                    v-model="
-                                                        dataVigenciaFimCobertura
-                                                    "
-                                                    no-title
-                                                    @input="
-                                                        dataVigenciaFimCoberturaMenu = false
-                                                    "
-                                                ></v-date-picker>
-                                            </v-menu>
-                                        </v-col>
-                                        <v-col cols="12" sm="2">
-                                            <v-text-field
-                                                label="Valor"
-                                                outlined
-                                                hide-details="auto"
-                                            ></v-text-field>
-                                        </v-col>
-                                    </v-row>
-                                </v-card-text>
-                                <v-divider></v-divider>
-                                <v-card-actions>
-                                    <v-row class="mt-2 ml-2 pb-2">
-                                        <v-btn color="primary">Salvar</v-btn>
-                                    </v-row>
-                                </v-card-actions>
-                            </v-card>
-                        </v-tab-item>
-                    </v-tabs-items>
-                </v-card>
+                                            </v-row>
+                                        </v-card-actions>
+                                    </v-card>
+                                </v-tab-item>
+                            </v-tabs-items>
+                        </v-card>
+                    </v-col>
+                </v-row>
             </v-container>
         </v-main>
         <v-footer app> </v-footer>
