@@ -10,6 +10,7 @@
                             label="Código"
                             outlined
                             hide-details="auto"
+                            v-model="pesquisa.id"
                         ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="4">
@@ -17,6 +18,7 @@
                             label="CNPJ"
                             outlined
                             hide-details="auto"
+                            v-model="pesquisa.cnpj"
                         ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="5">
@@ -24,6 +26,7 @@
                             label="Nome"
                             outlined
                             hide-details="auto"
+                            v-model="pesquisa.nome"
                         ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="1">
@@ -49,7 +52,7 @@
                             class="elevation-1"
                         >
                             <template v-slot:[`item.actions`]="{ item }">
-                                <v-icon class="ml-3" @click="editItem(item)">
+                                <v-icon class="ml-3" @click="selecionado(item)">
                                     mdi-eye-outline
                                 </v-icon>
                             </template>
@@ -564,8 +567,34 @@
                                         <v-divider></v-divider>
                                         <v-card-actions>
                                             <v-row class="mt-2 ml-2 pb-2">
-                                                <v-btn color="primary"
-                                                    >Salvar</v-btn
+                                                <v-btn
+                                                    color="primary"
+                                                    :loading="salvando"
+                                                    @click="alterar()"
+                                                >
+                                                    <v-icon left>
+                                                        mdi-pencil </v-icon
+                                                    >Alterar
+                                                </v-btn>
+                                                <v-btn
+                                                    class="ml-2"
+                                                    color="primary"
+                                                    :loading="adicionando"
+                                                    @click="adicionar()"
+                                                >
+                                                    <v-icon left>
+                                                        mdi-plus </v-icon
+                                                    >Adicionar</v-btn
+                                                >
+                                                <v-btn
+                                                    class="ml-2"
+                                                    color="primary"
+                                                    :loading="excluindo"
+                                                    @click="excluir()"
+                                                >
+                                                    <v-icon left>
+                                                        mdi-delete </v-icon
+                                                    >Excluir</v-btn
                                                 >
                                             </v-row>
                                         </v-card-actions>
@@ -633,6 +662,7 @@ export default {
             { text: "Coberturas", value: "coberturas" },
             { text: "Visualizar", value: "actions", sortable: false },
         ],
+
         empresas: [],
         empresa: {
             id: "",
@@ -641,20 +671,11 @@ export default {
             produtos: "",
             coberturas: "",
         },
-        editedIndex: -1,
-        editedItem: {
-            name: "",
-            calories: 0,
-            fat: 0,
-            carbs: 0,
-            protein: 0,
-        },
-        defaultItem: {
-            name: "",
-            calories: 0,
-            fat: 0,
-            carbs: 0,
-            protein: 0,
+
+        pesquisa: {
+            id: "",
+            cnpj: "",
+            nome: "",
         },
     }),
 
@@ -676,9 +697,6 @@ export default {
         },
         computedDataVigenciaFimCoberturaFormatada() {
             return this.formatDate(this.dataVigenciaFimCobertura);
-        },
-        formTitle() {
-            return this.editedIndex === -1 ? "New Item" : "Edit Item";
         },
     },
 
@@ -719,9 +737,11 @@ export default {
         pesquisar() {
             this.pesquisando = true;
             let self = this;
-            EmpresaService.obter(null)
+            EmpresaService.obter(this.clean(this.pesquisa))
+
                 .then((response) => {
                     this.empresas = response.data;
+                    console.log(response);
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -793,18 +813,25 @@ export default {
             return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
         },
 
-        editItem(item) {
-            this.empresa = item;
+        clean(obj) {
+            let retorno = {};
+            for (var propName in obj) {
+                if (
+                    !(
+                        obj[propName] === null ||
+                        obj[propName] === undefined ||
+                        obj[propName] == ""
+                    )
+                ) {
+                    retorno[propName] = obj[propName];
+                }
+            }
+            return retorno;
         },
 
-        save() {
-            if (this.editedIndex > -1) {
-                Object.assign(this.empresas[this.editedIndex], this.editedItem);
-            } else {
-                this.empresas.push(this.editedItem);
-            }
-            this.close();
-        },
+        selecionado(obj) {
+            this.empresa = obj
+        }
     },
 };
 </script>

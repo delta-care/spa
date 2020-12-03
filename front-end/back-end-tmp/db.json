@@ -66,13 +66,6 @@
       "coberturas": 8
     },
     {
-      "id": "6711357256",
-      "cnpj": "0889733856",
-      "nome": "Schmeler-Gulgowski",
-      "produtos": 9,
-      "coberturas": 9
-    },
-    {
       "id": "4098632942",
       "cnpj": "2214187561",
       "nome": "Quigley-Ruecker",
@@ -141,6 +134,11 @@
       "nome": "Langosh LLC",
       "produtos": 20,
       "coberturas": 20
+    },
+    {
+      "id": "333",
+      "cnpj": "22",
+      "nome": "test"
     }
   ]
 }

@@ -17,7 +17,7 @@ function alterar(dados) {
 }
 
 function obter(dados) {
-    return api.get('/empresas/', dados)
+    return api.get('/empresas/', { params: dados } )
 }
 
 function excluir(dados) {
