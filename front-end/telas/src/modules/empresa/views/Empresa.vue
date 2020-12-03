@@ -62,6 +62,7 @@
                             label="Código"
                             outlined
                             disabled
+                            v-model="empresa.codigo"
                         ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="5">
@@ -69,6 +70,7 @@
                             label="Nome"
                             outlined
                             disabled
+                            v-model="empresa.nome"
                         ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="2">
