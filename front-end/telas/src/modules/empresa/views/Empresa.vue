@@ -67,9 +67,9 @@
                                                     >
                                                         <v-text-field
                                                             v-model="
-                                                                editedItem.name
+                                                                editedItem.codigo
                                                             "
-                                                            label="Dessert name"
+                                                            label="Código"
                                                         ></v-text-field>
                                                     </v-col>
                                                     <v-col
@@ -79,9 +79,9 @@
                                                     >
                                                         <v-text-field
                                                             v-model="
-                                                                editedItem.calories
+                                                                editedItem.cnpj
                                                             "
-                                                            label="Calories"
+                                                            label="CNPJ"
                                                         ></v-text-field>
                                                     </v-col>
                                                     <v-col
@@ -91,9 +91,9 @@
                                                     >
                                                         <v-text-field
                                                             v-model="
-                                                                editedItem.fat
+                                                                editedItem.nome
                                                             "
-                                                            label="Fat (g)"
+                                                            label="Nome"
                                                         ></v-text-field>
                                                     </v-col>
                                                     <v-col
@@ -103,9 +103,9 @@
                                                     >
                                                         <v-text-field
                                                             v-model="
-                                                                editedItem.carbs
+                                                                editedItem.produtos
                                                             "
-                                                            label="Carbs (g)"
+                                                            label="Produtos"
                                                         ></v-text-field>
                                                     </v-col>
                                                     <v-col
@@ -115,9 +115,9 @@
                                                     >
                                                         <v-text-field
                                                             v-model="
-                                                                editedItem.protein
+                                                                editedItem.coberturas
                                                             "
-                                                            label="Protein (g)"
+                                                            label="Coberturas"
                                                         ></v-text-field>
                                                     </v-col>
                                                 </v-row>
@@ -634,6 +634,7 @@
 <script>
 import AppToolbar from "./../../../components/AppToolbar.vue";
 import AppMenu from "./../../../components/AppMenu.vue";
+import EmpresaService from "./../services/";
 
 export default {
     name: "Empresa",
@@ -677,12 +678,12 @@ export default {
             {
                 text: "Código",
                 align: "start",
-                value: "name",
+                value: "codigo",
             },
-            { text: "CNPJ", value: "calories" },
-            { text: "Nome", value: "fat" },
-            { text: "Produtos", value: "carbs" },
-            { text: "Coberturas", value: "protein" },
+            { text: "CNPJ", value: "cnpj" },
+            { text: "Nome", value: "nome" },
+            { text: "Produtos", value: "produtos" },
+            { text: "Coberturas", value: "coberturas" },
             { text: "Visualizar", value: "actions", sortable: false },
         ],
         empresas: [],
@@ -769,6 +770,16 @@ export default {
     methods: {
         pesquisar() {
             this.pesquisando = true;
+            EmpresaService.obterEmpresas(null)
+                .then((response) => {
+                    this.empresas = response.data;
+                    this.pesquisando = false;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+                .then(function () {
+                });
         },
 
         formatDate(date) {
