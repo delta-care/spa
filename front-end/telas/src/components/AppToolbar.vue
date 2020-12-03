@@ -3,7 +3,6 @@
     app
     flat
     height="57px"
-    color="#fff"
     style="border: 1px solid rgba(0, 0, 0, 0.12)"
   >
     <v-toolbar-title> DeltaCare</v-toolbar-title>
@@ -13,6 +12,12 @@
     <span class="subheading"></span>
 
     <v-spacer></v-spacer>
+
+    <v-switch
+      v-model="$vuetify.theme.dark"
+      inset
+      class="mt-6"
+    ></v-switch>
 
     <v-btn icon>
       <v-icon>mdi-magnify</v-icon>
