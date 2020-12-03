@@ -45,114 +45,13 @@
                             :items="empresas"
                             :items-per-page="5"
                             :loading="pesquisando"
-                            sort-by="calories"
+                            sort-by="codigo"
                             class="elevation-1"
                         >
-                            <template v-slot:top>
-                                <v-dialog v-model="dialog" max-width="500px">
-                                    <v-card>
-                                        <v-card-title>
-                                            <span class="headline">{{
-                                                formTitle
-                                            }}</span>
-                                        </v-card-title>
-
-                                        <v-card-text>
-                                            <v-container>
-                                                <v-row>
-                                                    <v-col
-                                                        cols="12"
-                                                        sm="6"
-                                                        md="4"
-                                                    >
-                                                        <v-text-field
-                                                            v-model="
-                                                                editedItem.codigo
-                                                            "
-                                                            label="Código"
-                                                        ></v-text-field>
-                                                    </v-col>
-                                                    <v-col
-                                                        cols="12"
-                                                        sm="6"
-                                                        md="4"
-                                                    >
-                                                        <v-text-field
-                                                            v-model="
-                                                                editedItem.cnpj
-                                                            "
-                                                            label="CNPJ"
-                                                        ></v-text-field>
-                                                    </v-col>
-                                                    <v-col
-                                                        cols="12"
-                                                        sm="6"
-                                                        md="4"
-                                                    >
-                                                        <v-text-field
-                                                            v-model="
-                                                                editedItem.nome
-                                                            "
-                                                            label="Nome"
-                                                        ></v-text-field>
-                                                    </v-col>
-                                                    <v-col
-                                                        cols="12"
-                                                        sm="6"
-                                                        md="4"
-                                                    >
-                                                        <v-text-field
-                                                            v-model="
-                                                                editedItem.produtos
-                                                            "
-                                                            label="Produtos"
-                                                        ></v-text-field>
-                                                    </v-col>
-                                                    <v-col
-                                                        cols="12"
-                                                        sm="6"
-                                                        md="4"
-                                                    >
-                                                        <v-text-field
-                                                            v-model="
-                                                                editedItem.coberturas
-                                                            "
-                                                            label="Coberturas"
-                                                        ></v-text-field>
-                                                    </v-col>
-                                                </v-row>
-                                            </v-container>
-                                        </v-card-text>
-
-                                        <v-card-actions>
-                                            <v-spacer></v-spacer>
-                                            <v-btn
-                                                color="blue darken-1"
-                                                text
-                                                @click="close"
-                                            >
-                                                Cancel
-                                            </v-btn>
-                                            <v-btn
-                                                color="blue darken-1"
-                                                text
-                                                @click="save"
-                                            >
-                                                Save
-                                            </v-btn>
-                                        </v-card-actions>
-                                    </v-card>
-                                </v-dialog>
-                            </template>
                             <template v-slot:[`item.actions`]="{ item }">
                                 <v-icon class="ml-3" @click="editItem(item)">
                                     mdi-eye-outline
                                 </v-icon>
-                            </template>
-                            <template v-slot:no-data>
-                                <v-btn color="primary" @click="initialize">
-                                    Reset
-                                </v-btn>
                             </template>
                         </v-data-table>
                     </v-col>
@@ -220,7 +119,6 @@
                             Produtos e Coberturas
                         </v-tab>
                     </v-tabs>
-
                     <v-tabs-items v-model="tab">
                         <v-tab-item key="Dados Básicos">
                             <v-card>
@@ -648,14 +546,8 @@ export default {
 
         tab: null,
 
-        dialog: false,
-        dialogDelete: false,
         headers: [
-            {
-                text: "Código",
-                align: "start",
-                value: "codigo",
-            },
+            { text: "Código", value: "codigo" },
             { text: "CNPJ", value: "cnpj" },
             { text: "Nome", value: "nome" },
             { text: "Produtos", value: "produtos" },
@@ -668,7 +560,7 @@ export default {
             cnpj: "",
             nome: "",
             produtos: "",
-            categorias: ""
+            categorias: "",
         },
         editedIndex: -1,
         editedItem: {
@@ -738,12 +630,6 @@ export default {
                 this.dataVigenciaFimCobertura
             );
         },
-        dialog(val) {
-            val || this.close();
-        },
-        dialogDelete(val) {
-            val || this.closeDelete();
-        },
     },
 
     created() {
@@ -761,8 +647,7 @@ export default {
                 .catch(function (error) {
                     console.log(error);
                 })
-                .then(function () {
-                });
+                .then(function () {});
         },
 
         formatDate(date) {
@@ -778,103 +663,12 @@ export default {
             return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
         },
 
-        initialize() {
-            this.empresas = [
-                {
-                    name: "56342364",
-                    calories: "40.346.991/0001-83",
-                    fat: "EFER CONSTRUTORES ASSOCIADOS LTDA",
-                    carbs: 2,
-                    protein: 1,
-                },
-                {
-                    name: "56342364",
-                    calories: "40.346.991/0001-83",
-                    fat: "EFER CONSTRUTORES ASSOCIADOS LTDA",
-                    carbs: 2,
-                    protein: 1,
-                },
-                {
-                    name: "56342364",
-                    calories: "40.346.991/0001-83",
-                    fat: "EFER CONSTRUTORES ASSOCIADOS LTDA",
-                    carbs: 2,
-                    protein: 1,
-                },
-                {
-                    name: "56342364",
-                    calories: "40.346.991/0001-83",
-                    fat: "EFER CONSTRUTORES ASSOCIADOS LTDA",
-                    carbs: 2,
-                    protein: 1,
-                },
-                {
-                    name: "56342364",
-                    calories: "40.346.991/0001-83",
-                    fat: "EFER CONSTRUTORES ASSOCIADOS LTDA",
-                    carbs: 2,
-                    protein: 1,
-                },
-                {
-                    name: "56342364",
-                    calories: "40.346.991/0001-83",
-                    fat: "EFER CONSTRUTORES ASSOCIADOS LTDA",
-                    carbs: 2,
-                    protein: 1,
-                },
-                {
-                    name: "56342364",
-                    calories: "40.346.991/0001-83",
-                    fat: "EFER CONSTRUTORES ASSOCIADOS LTDA",
-                    carbs: 2,
-                    protein: 1,
-                },
-                {
-                    name: "56342364",
-                    calories: "40.346.991/0001-83",
-                    fat: "EFER CONSTRUTORES ASSOCIADOS LTDA",
-                    carbs: 2,
-                    protein: 1,
-                },
-                {
-                    name: "56342364",
-                    calories: "40.346.991/0001-83",
-                    fat: "EFER CONSTRUTORES ASSOCIADOS LTDA",
-                    carbs: 2,
-                    protein: 1,
-                },
-                {
-                    name: "56342364",
-                    calories: "40.346.991/0001-83",
-                    fat: "EFER CONSTRUTORES ASSOCIADOS LTDA",
-                    carbs: 2,
-                    protein: 1,
-                },
-            ];
-        },
-
         editItem(item) {
             this.empresa = item;
             //this.editedIndex = this.empresas.indexOf(item);
             //console.log(item);
             //this.editedItem = Object.assign({}, item);
             //this.dialog = true;
-        },
-
-        close() {
-            this.dialog = false;
-            this.$nextTick(() => {
-                this.editedItem = Object.assign({}, this.defaultItem);
-                this.editedIndex = -1;
-            });
-        },
-
-        closeDelete() {
-            this.dialogDelete = false;
-            this.$nextTick(() => {
-                this.editedItem = Object.assign({}, this.defaultItem);
-                this.editedIndex = -1;
-            });
         },
 
         save() {
