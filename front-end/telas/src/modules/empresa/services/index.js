@@ -1,17 +1,32 @@
 import axios from 'axios'
 
-const apiClient = axios.create({
-  baseURL: 'http://localhost:3000',
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json'
-  }
+const api = axios.create({
+    baseURL: 'http://localhost:3000',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
 })
 
-function obterEmpresas(params) {
-  return apiClient.get('/empresas/', { params })
+function adicionar(dados) {
+    return api.post('/empresas/', dados)
+}
+
+function alterar(dados) {
+    return api.patch('/empresas/' + dados.id, dados)
+}
+
+function obter(dados) {
+    return api.get('/empresas/', dados)
+}
+
+function excluir(dados) {
+    return api.delete('/empresas/' + dados.id, dados)
 }
 
 export default {
-    obterEmpresas
+    adicionar,
+    alterar,
+    obter,
+    excluir
 }

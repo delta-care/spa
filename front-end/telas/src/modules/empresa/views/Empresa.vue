@@ -45,7 +45,7 @@
                             :items="empresas"
                             :items-per-page="5"
                             :loading="pesquisando"
-                            sort-by="codigo"
+                            sort-by="id"
                             class="elevation-1"
                         >
                             <template v-slot:[`item.actions`]="{ item }">
@@ -56,13 +56,14 @@
                         </v-data-table>
                     </v-col>
                 </v-row>
+                <!--
                 <v-row>
                     <v-col cols="12" sm="2">
                         <v-text-field
                             label="Código"
                             outlined
                             disabled
-                            v-model="empresa.codigo"
+                            v-model="empresa.id"
                         ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="5">
@@ -118,12 +119,13 @@
                             color="primary"
                             fab
                             hide-details="auto"
-                            @click="editar()"
+                            @click="adicionar()"
                         >
                             <v-icon> mdi-account-plus </v-icon></v-btn
                         >
                     </v-col>
                 </v-row>
+                -->
                 <v-card>
                     <v-tabs v-model="tab" background-color="primary" dark>
                         <v-tab key="Dados Básicos"> Dados Básicos </v-tab>
@@ -141,7 +143,7 @@
                                                 label="Código"
                                                 outlined
                                                 hide-details="auto"
-                                                v-model="empresa.codigo"
+                                                v-model="empresa.id"
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="4">
@@ -274,7 +276,32 @@
                                 <v-divider></v-divider>
                                 <v-card-actions>
                                     <v-row class="mt-2 ml-2 pb-2">
-                                        <v-btn color="primary">Salvar</v-btn>
+                                        <v-btn
+                                            color="primary"
+                                            :loading="salvando"
+                                            @click="alterar()"
+                                        >
+                                            <v-icon left> mdi-pencil </v-icon
+                                            >Alterar
+                                        </v-btn>
+                                        <v-btn
+                                            class="ml-2"
+                                            color="primary"
+                                            :loading="adicionando"
+                                            @click="adicionar()"
+                                        >
+                                            <v-icon left> mdi-plus </v-icon
+                                            >Adicionar</v-btn
+                                        >
+                                        <v-btn
+                                            class="ml-2"
+                                            color="primary"
+                                            :loading="excluindo"
+                                            @click="excluir()"
+                                        >
+                                            <v-icon left> mdi-delete </v-icon
+                                            >Excluir</v-btn
+                                        >
                                     </v-row>
                                 </v-card-actions>
                             </v-card>
@@ -531,6 +558,9 @@ export default {
 
     data: () => ({
         pesquisando: false,
+        salvando: false,
+        adicionando: false,
+        excluindo: false,
 
         dataAdmissao1: "",
         dataAdmissaoFormatada1: "",
@@ -559,7 +589,7 @@ export default {
         tab: null,
 
         headers: [
-            { text: "Código", value: "codigo" },
+            { text: "Código", value: "id" },
             { text: "CNPJ", value: "cnpj" },
             { text: "Nome", value: "nome" },
             { text: "Produtos", value: "produtos" },
@@ -568,11 +598,11 @@ export default {
         ],
         empresas: [],
         empresa: {
-            codigo: "",
+            id: "",
             cnpj: "",
             nome: "",
             produtos: "",
-            categorias: "",
+            coberturas: "",
         },
         editedIndex: -1,
         editedItem: {
@@ -651,15 +681,66 @@ export default {
     methods: {
         pesquisar() {
             this.pesquisando = true;
-            EmpresaService.obterEmpresas(null)
+            let self = this;
+            EmpresaService.obter(null)
                 .then((response) => {
                     this.empresas = response.data;
-                    this.pesquisando = false;
                 })
                 .catch(function (error) {
                     console.log(error);
                 })
-                .then(function () {});
+                .then(function () {
+                    self.pesquisando = false;
+                });
+        },
+
+        alterar() {
+            this.salvando = true;
+            let self = this;
+            console.log(JSON.parse(JSON.stringify(this.empresa)));
+            EmpresaService.alterar(JSON.parse(JSON.stringify(this.empresa)))
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+                .then(function () {
+                    self.salvando = false;
+                });
+        },
+
+        adicionar() {
+            this.adicionando = true;
+            let self = this;
+            console.log(JSON.parse(JSON.stringify(this.empresa)));
+            EmpresaService.adicionar(JSON.parse(JSON.stringify(this.empresa)))
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+                .then(function () {
+                    self.adicionando = false;
+                });
+        },
+
+        excluir() {
+            this.excluindo = true;
+            let self = this;
+            console.log(JSON.parse(JSON.stringify(this.empresa)));
+            EmpresaService.excluir(JSON.parse(JSON.stringify(this.empresa)))
+                .then((response) => {
+                    self.empresa = {};
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+                .then(function () {
+                    self.excluindo = false;
+                });
         },
 
         formatDate(date) {
@@ -677,10 +758,6 @@ export default {
 
         editItem(item) {
             this.empresa = item;
-            //this.editedIndex = this.empresas.indexOf(item);
-            //console.log(item);
-            //this.editedItem = Object.assign({}, item);
-            //this.dialog = true;
         },
 
         save() {
