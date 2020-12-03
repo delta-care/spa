@@ -6,13 +6,25 @@
             <v-container>
                 <v-row>
                     <v-col cols="12" sm="2">
-                        <v-text-field label="Código" outlined hide-details="auto"></v-text-field>
+                        <v-text-field
+                            label="Código"
+                            outlined
+                            hide-details="auto"
+                        ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="4">
-                        <v-text-field label="CNPJ" outlined hide-details="auto"></v-text-field>
+                        <v-text-field
+                            label="CNPJ"
+                            outlined
+                            hide-details="auto"
+                        ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="5">
-                        <v-text-field label="Nome" outlined hide-details="auto"></v-text-field>
+                        <v-text-field
+                            label="Nome"
+                            outlined
+                            hide-details="auto"
+                        ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="1">
                         <v-btn color="primary" fab hide-details="auto">
@@ -407,7 +419,7 @@
                         </v-tab-item>
                         <v-tab-item key="Produtos e Coberturas">
                             <v-card>
-                                <v-card-text>
+                                <v-card-text class="pt-6">
                                     <h2>Produto</h2>
                                     <v-divider class="mt-2"></v-divider>
                                     <v-row class="mt-2">
@@ -558,6 +570,7 @@
                                                         "
                                                         v-on="on"
                                                         outlined
+                                                        hide-details="auto"
                                                     ></v-text-field>
                                                 </template>
                                                 <v-date-picker
@@ -603,6 +616,7 @@
                                                         "
                                                         v-on="on"
                                                         outlined
+                                                        hide-details="auto"
                                                     ></v-text-field>
                                                 </template>
                                                 <v-date-picker
@@ -620,6 +634,7 @@
                                             <v-text-field
                                                 label="Valor"
                                                 outlined
+                                                hide-details="auto"
                                             ></v-text-field>
                                         </v-col>
                                     </v-row>
@@ -627,9 +642,7 @@
                                 <v-divider></v-divider>
                                 <v-card-actions>
                                     <v-row class="mt-2 ml-2 pb-2">
-                                        <v-btn color="primary" large
-                                            >Salvar</v-btn
-                                        >
+                                        <v-btn color="primary">Salvar</v-btn>
                                     </v-row>
                                 </v-card-actions>
                             </v-card>
