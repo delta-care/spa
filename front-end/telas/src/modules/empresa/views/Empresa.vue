@@ -27,7 +27,13 @@
                         ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="1">
-                        <v-btn color="primary" fab hide-details="auto">
+                        <v-btn
+                            color="primary"
+                            fab
+                            hide-details="auto"
+                            @click="pesquisar()"
+                            :loading="pesquisando"
+                        >
                             <v-icon> mdi-account-search </v-icon></v-btn
                         >
                     </v-col>
@@ -36,8 +42,9 @@
                     <v-col cols="12" sm="12">
                         <v-data-table
                             :headers="headers"
-                            :items="desserts"
-                            items-per-page="5"
+                            :items="empresas"
+                            :items-per-page="5"
+                            :loading="pesquisando"
                             sort-by="calories"
                             class="elevation-1"
                         >
@@ -636,6 +643,8 @@ export default {
     },
 
     data: () => ({
+        pesquisando: false,
+
         dataAdmissao1: "",
         dataAdmissaoFormatada1: "",
         menuDataAdmissao1: false,
@@ -676,7 +685,7 @@ export default {
             { text: "Coberturas", value: "protein" },
             { text: "Visualizar", value: "actions", sortable: false },
         ],
-        desserts: [],
+        empresas: [],
         editedIndex: -1,
         editedItem: {
             name: "",
@@ -758,11 +767,16 @@ export default {
     },
 
     methods: {
+        pesquisar() {
+            this.pesquisando = true;
+        },
+
         formatDate(date) {
             if (!date) return null;
             const [year, month, day] = date.split("-");
             return `${day}/${month}/${year}`;
         },
+
         parseDate(date) {
             if (!date) return null;
 
@@ -771,7 +785,7 @@ export default {
         },
 
         initialize() {
-            this.desserts = [
+            this.empresas = [
                 {
                     name: "56342364",
                     calories: "40.346.991/0001-83",
@@ -846,19 +860,19 @@ export default {
         },
 
         editItem(item) {
-            this.editedIndex = this.desserts.indexOf(item);
+            this.editedIndex = this.empresas.indexOf(item);
             this.editedItem = Object.assign({}, item);
             this.dialog = true;
         },
 
         deleteItem(item) {
-            this.editedIndex = this.desserts.indexOf(item);
+            this.editedIndex = this.empresas.indexOf(item);
             this.editedItem = Object.assign({}, item);
             this.dialogDelete = true;
         },
 
         deleteItemConfirm() {
-            this.desserts.splice(this.editedIndex, 1);
+            this.empresas.splice(this.editedIndex, 1);
             this.closeDelete();
         },
 
@@ -880,9 +894,9 @@ export default {
 
         save() {
             if (this.editedIndex > -1) {
-                Object.assign(this.desserts[this.editedIndex], this.editedItem);
+                Object.assign(this.empresas[this.editedIndex], this.editedItem);
             } else {
-                this.desserts.push(this.editedItem);
+                this.empresas.push(this.editedItem);
             }
             this.close();
         },
