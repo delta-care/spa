@@ -13,7 +13,7 @@
                             v-model="pesquisa.id"
                         ></v-text-field>
                     </v-col>
-                    <v-col cols="12" sm="4">
+                    <v-col cols="12" sm="3">
                         <v-text-field
                             label="CNPJ"
                             outlined
@@ -30,14 +30,25 @@
                         ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="1">
+
                         <v-btn
-                            color="primary"
+                            color="primary ml-4"
                             fab
                             hide-details="auto"
                             @click="pesquisar()"
                             :loading="pesquisando"
                         >
                             <v-icon> mdi-account-search </v-icon></v-btn
+                        >
+                    </v-col>
+                    <v-col cols="12" sm="1">
+                        <v-btn
+                            color="primary"
+                            fab
+                            hide-details="auto"
+                            @click="apagar()"
+                        >
+                            <v-icon> mdi-eraser </v-icon></v-btn
                         >
                     </v-col>
                 </v-row>
@@ -670,7 +681,6 @@ export default {
             this.pesquisando = true;
             let self = this;
             EmpresaService.obter(this.clean(this.pesquisa))
-
                 .then((response) => {
                     this.empresas = response.data;
                     console.log(response);
@@ -730,6 +740,10 @@ export default {
                 .then(function () {
                     self.excluindo = false;
                 });
+        },
+
+        apagar() {
+            this.empresas = []
         },
 
         formatDate(date) {
