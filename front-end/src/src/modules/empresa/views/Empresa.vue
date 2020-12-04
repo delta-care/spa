@@ -222,7 +222,9 @@
                                         </v-card-text>
                                         <v-divider></v-divider>
                                         <v-card-actions>
-                                            <v-row class="mt-2 ml-2 pb-2 justify-center"> 
+                                            <v-row
+                                                class="mt-2 ml-2 pb-2 justify-center"
+                                            >
                                                 <v-btn
                                                     color="primary"
                                                     :loading="adicionando"
@@ -495,8 +497,10 @@
                                             </v-row>
                                         </v-card-text>
                                         <v-divider></v-divider>
-                                         <v-card-actions>
-                                            <v-row class="mt-2 ml-2 pb-2 justify-center"> 
+                                        <v-card-actions>
+                                            <v-row
+                                                class="mt-2 ml-2 pb-2 justify-center"
+                                            >
                                                 <v-btn
                                                     color="primary"
                                                     :loading="adicionando"
@@ -552,62 +556,64 @@ export default {
         AppMenu,
     },
 
-    data: () => ({
-        pesquisando: false,
-        salvando: false,
-        adicionando: false,
-        excluindo: false,
+    data() {
+        return {
+            pesquisando: false,
+            salvando: false,
+            adicionando: false,
+            excluindo: false,
 
-        dataAdmissao1: "",
-        dataAdmissaoFormatada1: "",
-        menuDataAdmissao1: false,
+            dataAdmissao1: "",
+            dataAdmissaoFormatada1: "",
+            menuDataAdmissao1: false,
 
-        dataAdmissao2: "",
-        dataAdmissaoFormatada2: "",
-        menuDataAdmissao2: false,
+            dataAdmissao2: "",
+            dataAdmissaoFormatada2: "",
+            menuDataAdmissao2: false,
 
-        dataVigenciaInicio: "",
-        dataVigenciaInicioFormatada: "",
-        dataVigenciaInicioMenu: false,
+            dataVigenciaInicio: "",
+            dataVigenciaInicioFormatada: "",
+            dataVigenciaInicioMenu: false,
 
-        dataVigenciaFim: "",
-        dataVigenciaFimFormatada: "",
-        dataVigenciaFimMenu: false,
+            dataVigenciaFim: "",
+            dataVigenciaFimFormatada: "",
+            dataVigenciaFimMenu: false,
 
-        dataVigenciaInicioCobertura: "",
-        dataVigenciaInicioCoberturaFormatada: "",
-        dataVigenciaInicioCoberturaMenu: false,
+            dataVigenciaInicioCobertura: "",
+            dataVigenciaInicioCoberturaFormatada: "",
+            dataVigenciaInicioCoberturaMenu: false,
 
-        dataVigenciaFimCobertura: "",
-        dataVigenciaFimCoberturaFormatada: "",
-        dataVigenciaFimCoberturaMenu: false,
+            dataVigenciaFimCobertura: "",
+            dataVigenciaFimCoberturaFormatada: "",
+            dataVigenciaFimCoberturaMenu: false,
 
-        tab: null,
+            tab: null,
 
-        headers: [
-            { text: "Código", value: "id" },
-            { text: "CNPJ", value: "cnpj" },
-            { text: "Nome", value: "nome" },
-            { text: "Produtos", value: "produtos" },
-            { text: "Coberturas", value: "coberturas" },
-            { text: "Visualizar", value: "actions", sortable: false },
-        ],
+            headers: [
+                { text: "Código", value: "id" },
+                { text: "CNPJ", value: "cnpj" },
+                { text: "Nome", value: "nome" },
+                { text: "Produtos", value: "produtos" },
+                { text: "Coberturas", value: "coberturas" },
+                { text: "Visualizar", value: "actions", sortable: false },
+            ],
 
-        empresas: [],
-        empresa: {
-            id: "",
-            cnpj: "",
-            nome: "",
-            produtos: "",
-            coberturas: "",
-        },
+            empresas: [],
+            empresa: {
+                id: "",
+                cnpj: "",
+                nome: "",
+                produtos: "",
+                coberturas: "",
+            },
 
-        pesquisa: {
-            id: "",
-            cnpj: "",
-            nome: "",
-        },
-    }),
+            pesquisa: {
+                id: "",
+                cnpj: "",
+                nome: "",
+            },
+        };
+    },
 
     computed: {
         computedDataAdmissaoFormatada() {
@@ -657,10 +663,6 @@ export default {
                 this.dataVigenciaFimCobertura
             );
         },
-    },
-
-    created() {
-        
     },
 
     methods: {
@@ -760,8 +762,8 @@ export default {
         },
 
         selecionado(obj) {
-            this.empresa = obj
-        }
+            this.empresa = obj;
+        },
     },
 };
 </script>
