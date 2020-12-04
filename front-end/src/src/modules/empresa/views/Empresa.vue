@@ -591,32 +591,47 @@
                                             >
                                                 <v-btn
                                                     color="primary"
+                                                    :disabled="
+                                                        adicionarDisabled
+                                                    "
                                                     :loading="adicionando"
                                                     @click="adicionar()"
                                                 >
                                                     <v-icon left>
                                                         mdi-plus </v-icon
-                                                    >Adicionar</v-btn
+                                                    >{{ adicionarLabel }}</v-btn
                                                 >
                                                 <v-btn
                                                     class="ml-2"
                                                     color="primary"
+                                                    :disabled="alterarDisabled"
                                                     :loading="alterando"
                                                     @click="alterar()"
                                                 >
                                                     <v-icon left>
                                                         mdi-pencil </v-icon
-                                                    >Alterar
+                                                    >{{ alterarLabel }}
                                                 </v-btn>
                                                 <v-btn
                                                     class="ml-2"
-                                                    color="primary"
+                                                    :disabled="excluirDisabled"
                                                     :loading="excluindo"
+                                                    color="primary"
                                                     @click="excluir()"
                                                 >
                                                     <v-icon left>
                                                         mdi-delete </v-icon
                                                     >Excluir</v-btn
+                                                >
+                                                <v-btn
+                                                    class="ml-2"
+                                                    :disabled="voltarDisabled"
+                                                    color="primary"
+                                                    @click="voltar()"
+                                                >
+                                                    <v-icon left>
+                                                        mdi-undo-variant </v-icon
+                                                    >voltar</v-btn
                                                 >
                                             </v-row>
                                         </v-card-actions>
