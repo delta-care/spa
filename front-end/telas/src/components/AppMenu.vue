@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer :mini-variant.sync="mini" permanent absolute app>
+  <v-navigation-drawer :mini-variant.sync="mini" app>
     <v-list-item class="px-2">
       <v-list-item-avatar>
         <v-img src="@/assets/dt-logo.png" style="height: 35px"></v-img>
