@@ -292,18 +292,8 @@
                                         </v-card-text>
                                         <v-divider></v-divider>
                                         <v-card-actions>
-                                            <v-row class="mt-2 ml-2 pb-2">
+                                            <v-row class="mt-2 ml-2 pb-2 justify-center"> 
                                                 <v-btn
-                                                    color="primary"
-                                                    :loading="salvando"
-                                                    @click="alterar()"
-                                                >
-                                                    <v-icon left>
-                                                        mdi-pencil </v-icon
-                                                    >Alterar
-                                                </v-btn>
-                                                <v-btn
-                                                    class="ml-2"
                                                     color="primary"
                                                     :loading="adicionando"
                                                     @click="adicionar()"
@@ -312,6 +302,16 @@
                                                         mdi-plus </v-icon
                                                     >Adicionar</v-btn
                                                 >
+                                                <v-btn
+                                                    class="ml-2"
+                                                    color="primary"
+                                                    :loading="salvando"
+                                                    @click="alterar()"
+                                                >
+                                                    <v-icon left>
+                                                        mdi-pencil </v-icon
+                                                    >Alterar
+                                                </v-btn>
                                                 <v-btn
                                                     class="ml-2"
                                                     color="primary"
@@ -565,19 +565,9 @@
                                             </v-row>
                                         </v-card-text>
                                         <v-divider></v-divider>
-                                        <v-card-actions>
-                                            <v-row class="mt-2 ml-2 pb-2">
+                                         <v-card-actions>
+                                            <v-row class="mt-2 ml-2 pb-2 justify-center"> 
                                                 <v-btn
-                                                    color="primary"
-                                                    :loading="salvando"
-                                                    @click="alterar()"
-                                                >
-                                                    <v-icon left>
-                                                        mdi-pencil </v-icon
-                                                    >Alterar
-                                                </v-btn>
-                                                <v-btn
-                                                    class="ml-2"
                                                     color="primary"
                                                     :loading="adicionando"
                                                     @click="adicionar()"
@@ -586,6 +576,16 @@
                                                         mdi-plus </v-icon
                                                     >Adicionar</v-btn
                                                 >
+                                                <v-btn
+                                                    class="ml-2"
+                                                    color="primary"
+                                                    :loading="salvando"
+                                                    @click="alterar()"
+                                                >
+                                                    <v-icon left>
+                                                        mdi-pencil </v-icon
+                                                    >Alterar
+                                                </v-btn>
                                                 <v-btn
                                                     class="ml-2"
                                                     color="primary"
