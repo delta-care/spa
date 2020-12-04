@@ -660,7 +660,7 @@ export default {
     },
 
     created() {
-        this.pesquisar();
+        
     },
 
     methods: {
