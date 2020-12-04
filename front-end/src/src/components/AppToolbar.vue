@@ -1,48 +1,79 @@
 <template>
-  <v-app-bar
-    app
-    flat
-    height="57px"
-    style="border: 1px solid rgba(0, 0, 0, 0.12)"
-  >
-    <v-toolbar-title> DeltaCare</v-toolbar-title>
+    <v-app-bar
+        app
+        flat
+        height="57px"
+        style="border: 1px solid rgba(0, 0, 0, 0.12)"
+    >
+        <v-toolbar-title> DeltaCare</v-toolbar-title>
 
-    <v-divider class="mx-4" vertical></v-divider>
+        <v-divider class="mx-4" vertical></v-divider>
 
-    <span class="subheading">{{ '' || title }}</span>
+        <span class="subheading">{{ "" || title }}</span>
 
-    <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
 
-    <v-switch
-      v-model="$vuetify.theme.dark"
-      inset
-      class="mt-6"
-    ></v-switch>
+        <v-switch v-model="$vuetify.theme.dark" inset class="mt-6"></v-switch>
 
-    <v-btn icon>
-      <v-icon>mdi-magnify</v-icon>
-    </v-btn>
+        <v-btn icon @click="showLogoutDialog = true">
+            <v-icon>mdi-exit-to-app</v-icon>
+        </v-btn>
 
-    <v-btn icon>
-      <v-icon>mdi-dots-vertical</v-icon>
-    </v-btn>
-  </v-app-bar>
+        <v-dialog v-model="showLogoutDialog" max-width="240">
+            <v-card>
+                <v-card-title class="headline">
+                    Deseja realmente sair?
+                </v-card-title>
+
+                <v-card-text>
+                    Alteração não salva será pertida, caso exista.
+                </v-card-text>
+
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+
+                    <v-btn
+                        color="green darken-1"
+                        text
+                        @click="showLogoutDialog = false"
+                    >
+                        Não
+                    </v-btn>
+
+                    <v-btn color="green darken-1" text @click="logout">
+                        Sim
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+    </v-app-bar>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 
 export default {
-  name: "AppToolbar",
-  props: {
-    show: Boolean,
-  },
-  model: {
-    prop: "show",
-    event: "hide",
-  },
-  computed: {
-      ...mapState(['title'])
-  }
+    name: "AppToolbar",
+    props: {
+        show: Boolean,
+    },
+    model: {
+        prop: "show",
+        event: "hide",
+    },
+    data() {
+        return {
+            showLogoutDialog: false,
+        };
+    },
+    computed: {
+        ...mapState(["title"]),
+    },
+    methods: {
+        logout() {
+            localStorage.removeItem('token');
+            this.$router.push('/login');
+        }
+    },
 };
 </script>
