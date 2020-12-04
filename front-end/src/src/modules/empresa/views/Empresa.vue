@@ -49,7 +49,7 @@
                             :items-per-page="5"
                             :loading="pesquisando"
                             sort-by="id"
-                            class="elevation-1"
+                            class="elevation-2"
                         >
                             <template v-slot:[`item.actions`]="{ item }">
                                 <v-icon class="ml-3" @click="selecionado(item)">
