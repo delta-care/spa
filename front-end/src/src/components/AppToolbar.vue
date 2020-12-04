@@ -9,7 +9,7 @@
 
     <v-divider class="mx-4" vertical></v-divider>
 
-    <span class="subheading"></span>
+    <span class="subheading">{{ '' || title }}</span>
 
     <v-spacer></v-spacer>
 
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: "AppToolbar",
   props: {
@@ -39,5 +41,8 @@ export default {
     prop: "show",
     event: "hide",
   },
+  computed: {
+      ...mapState(['title'])
+  }
 };
 </script>

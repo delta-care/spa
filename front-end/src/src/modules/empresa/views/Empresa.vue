@@ -146,9 +146,9 @@
                                                                 v-on="on"
                                                                 outlined
                                                                 hide-details="auto"
-                                                        :disabled="
-                                                            campoDisabled
-                                                        "
+                                                                :disabled="
+                                                                    campoDisabled
+                                                                "
                                                             ></v-text-field>
                                                         </template>
                                                         <v-date-picker
@@ -169,7 +169,7 @@
                                                         hide-details="auto"
                                                         :disabled="
                                                             campoDisabled
-                                                        "                                                        
+                                                        "
                                                     ></v-combobox>
                                                 </v-col>
                                                 <v-col cols="12" sm="2">
@@ -179,7 +179,7 @@
                                                         hide-details="auto"
                                                         :disabled="
                                                             campoDisabled
-                                                        "                                                        
+                                                        "
                                                     ></v-combobox>
                                                 </v-col>
                                             </v-row>
@@ -192,7 +192,7 @@
                                                         v-model="empresa.nome"
                                                         :disabled="
                                                             campoDisabled
-                                                        "                                                        
+                                                        "
                                                     ></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="2">
@@ -200,9 +200,9 @@
                                                         outlined
                                                         label="UF"
                                                         hide-details="auto"
-                                                         :disabled="
+                                                        :disabled="
                                                             campoDisabled
-                                                        "                                                       
+                                                        "
                                                     ></v-combobox>
                                                 </v-col>
                                                 <v-col cols="12" sm="3">
@@ -212,7 +212,7 @@
                                                         hide-details="auto"
                                                         :disabled="
                                                             campoDisabled
-                                                        "                                                        
+                                                        "
                                                     ></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="3">
@@ -222,7 +222,7 @@
                                                         hide-details="auto"
                                                         :disabled="
                                                             campoDisabled
-                                                        "                                                        
+                                                        "
                                                     ></v-text-field>
                                                 </v-col>
                                             </v-row>
@@ -234,7 +234,7 @@
                                                         hide-details="auto"
                                                         :disabled="
                                                             campoDisabled
-                                                        "                                                        
+                                                        "
                                                     ></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="4">
@@ -244,7 +244,7 @@
                                                         hide-details="auto"
                                                         :disabled="
                                                             campoDisabled
-                                                        "                                                        
+                                                        "
                                                     ></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="3">
@@ -254,7 +254,7 @@
                                                         hide-details="auto"
                                                         :disabled="
                                                             campoDisabled
-                                                        "                                                        
+                                                        "
                                                     ></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="3">
@@ -262,9 +262,9 @@
                                                         label="Email"
                                                         outlined
                                                         hide-details="auto"
-                                                         :disabled="
+                                                        :disabled="
                                                             campoDisabled
-                                                        "                                                       
+                                                        "
                                                     ></v-text-field>
                                                 </v-col>
                                             </v-row>
@@ -333,9 +333,9 @@
                                                         outlined
                                                         label="Plano"
                                                         hide-details="auto"
-                                                         :disabled="
+                                                        :disabled="
                                                             campoDisabled
-                                                        "                                                       
+                                                        "
                                                     ></v-combobox>
                                                 </v-col>
                                                 <v-col cols="12" sm="3">
@@ -343,9 +343,9 @@
                                                         outlined
                                                         label="Plano"
                                                         hide-details="auto"
-                                                         :disabled="
+                                                        :disabled="
                                                             campoDisabled
-                                                        "                                                       
+                                                        "
                                                     ></v-combobox>
                                                 </v-col>
                                                 <v-col cols="12" sm="2">
@@ -355,7 +355,7 @@
                                                         hide-details="auto"
                                                         :disabled="
                                                             campoDisabled
-                                                        "                                                        
+                                                        "
                                                     ></v-combobox>
                                                 </v-col>
                                                 <v-col cols="12" sm="2">
@@ -392,9 +392,9 @@
                                                                 "
                                                                 v-on="on"
                                                                 outlined
-                                                         :disabled="
-                                                            campoDisabled
-                                                        "                                                               
+                                                                :disabled="
+                                                                    campoDisabled
+                                                                "
                                                             ></v-text-field>
                                                         </template>
                                                         <v-date-picker
@@ -442,9 +442,9 @@
                                                                 "
                                                                 v-on="on"
                                                                 outlined
-                                                        :disabled="
-                                                            campoDisabled
-                                                        "                                                                
+                                                                :disabled="
+                                                                    campoDisabled
+                                                                "
                                                             ></v-text-field>
                                                         </template>
                                                         <v-date-picker
@@ -505,9 +505,9 @@
                                                                 v-on="on"
                                                                 outlined
                                                                 hide-details="auto"
-                                                         :disabled="
-                                                            campoDisabled
-                                                        "                                                               
+                                                                :disabled="
+                                                                    campoDisabled
+                                                                "
                                                             ></v-text-field>
                                                         </template>
                                                         <v-date-picker
@@ -556,9 +556,9 @@
                                                                 v-on="on"
                                                                 outlined
                                                                 hide-details="auto"
-                                                         :disabled="
-                                                            campoDisabled
-                                                        "                                                               
+                                                                :disabled="
+                                                                    campoDisabled
+                                                                "
                                                             ></v-text-field>
                                                         </template>
                                                         <v-date-picker
@@ -577,9 +577,9 @@
                                                         label="Valor"
                                                         outlined
                                                         hide-details="auto"
-                                                         :disabled="
+                                                        :disabled="
                                                             campoDisabled
-                                                        "                                                       
+                                                        "
                                                     ></v-text-field>
                                                 </v-col>
                                             </v-row>
@@ -651,6 +651,7 @@
 import AppToolbar from "./../../../components/AppToolbar.vue";
 import AppMenu from "./../../../components/AppMenu.vue";
 import EmpresaService from "./../services/";
+import { mapActions } from "vuex";
 
 export default {
     name: "Empresa",
@@ -923,6 +924,12 @@ export default {
             this.voltarDisabled = true;
             this.campoDisabled = true;
         },
+
+        ...mapActions(["setTitle"]),
+    },
+
+    created() {
+        this.setTitle({ title: "Gestão de Empresa" });
     },
 };
 </script>
