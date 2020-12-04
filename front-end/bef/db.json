@@ -25,7 +25,7 @@
     },
     {
       "id": "0619384565",
-      "cnpj": "0960148418",
+      "cnpj": "990960148418",
       "nome": "Hilpert, Upton and Kovacek",
       "produtos": 2,
       "coberturas": 2
@@ -57,13 +57,6 @@
       "nome": "Towne-Lockman",
       "produtos": 7,
       "coberturas": 7
-    },
-    {
-      "id": "8143257649",
-      "cnpj": "3916287559",
-      "nome": "Green and Sons",
-      "produtos": 8,
-      "coberturas": 8
     },
     {
       "id": "4098632942",
@@ -115,23 +108,11 @@
       "coberturas": 18
     },
     {
-      "id": "0167946757",
-      "cnpj": "9074667821",
-      "nome": "Cummerata-Bergstrom ",
-      "produtos": 19,
-      "coberturas": 19
-    },
-    {
       "id": "6427050036",
       "cnpj": "6380228330",
       "nome": "Langosh LLC",
       "produtos": 20,
       "coberturas": 20
-    },
-    {
-      "id": "333",
-      "cnpj": "22",
-      "nome": "test"
     }
   ]
 }

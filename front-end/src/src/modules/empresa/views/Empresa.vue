@@ -30,7 +30,6 @@
                         ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="1">
-
                         <v-btn
                             color="primary ml-4"
                             fab
@@ -46,7 +45,7 @@
                             color="primary"
                             fab
                             hide-details="auto"
-                            @click="apagar()"
+                            @click="apagarEmpresas()"
                         >
                             <v-icon> mdi-eraser </v-icon></v-btn
                         >
@@ -63,7 +62,7 @@
                             class="elevation-2"
                         >
                             <template v-slot:[`item.actions`]="{ item }">
-                                <v-icon class="ml-3" @click="selecionado(item)">
+                                <v-icon class="ml-3" @click="selecionar(item)">
                                     mdi-eye-outline
                                 </v-icon>
                             </template>
@@ -96,6 +95,9 @@
                                                         outlined
                                                         hide-details="auto"
                                                         v-model="empresa.id"
+                                                        :disabled="
+                                                            campoDisabled
+                                                        "
                                                     ></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="4">
@@ -104,6 +106,9 @@
                                                         outlined
                                                         hide-details="auto"
                                                         v-model="empresa.cnpj"
+                                                        :disabled="
+                                                            campoDisabled
+                                                        "
                                                     ></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="2">
@@ -141,6 +146,9 @@
                                                                 v-on="on"
                                                                 outlined
                                                                 hide-details="auto"
+                                                                :disabled="
+                                                                    campoDisabled
+                                                                "
                                                             ></v-text-field>
                                                         </template>
                                                         <v-date-picker
@@ -159,6 +167,9 @@
                                                         outlined
                                                         label="Filial Cont."
                                                         hide-details="auto"
+                                                        :disabled="
+                                                            campoDisabled
+                                                        "
                                                     ></v-combobox>
                                                 </v-col>
                                                 <v-col cols="12" sm="2">
@@ -166,6 +177,9 @@
                                                         outlined
                                                         label="Administ."
                                                         hide-details="auto"
+                                                        :disabled="
+                                                            campoDisabled
+                                                        "
                                                     ></v-combobox>
                                                 </v-col>
                                             </v-row>
@@ -176,6 +190,9 @@
                                                         outlined
                                                         hide-details="auto"
                                                         v-model="empresa.nome"
+                                                        :disabled="
+                                                            campoDisabled
+                                                        "
                                                     ></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="2">
@@ -183,6 +200,9 @@
                                                         outlined
                                                         label="UF"
                                                         hide-details="auto"
+                                                        :disabled="
+                                                            campoDisabled
+                                                        "
                                                     ></v-combobox>
                                                 </v-col>
                                                 <v-col cols="12" sm="3">
@@ -190,6 +210,9 @@
                                                         label="C.E.I"
                                                         outlined
                                                         hide-details="auto"
+                                                        :disabled="
+                                                            campoDisabled
+                                                        "
                                                     ></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="3">
@@ -197,6 +220,9 @@
                                                         label="Inscrição Municipal"
                                                         outlined
                                                         hide-details="auto"
+                                                        :disabled="
+                                                            campoDisabled
+                                                        "
                                                     ></v-text-field>
                                                 </v-col>
                                             </v-row>
@@ -206,6 +232,9 @@
                                                         label="CEP"
                                                         outlined
                                                         hide-details="auto"
+                                                        :disabled="
+                                                            campoDisabled
+                                                        "
                                                     ></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="4">
@@ -213,6 +242,9 @@
                                                         label="Logradouro"
                                                         outlined
                                                         hide-details="auto"
+                                                        :disabled="
+                                                            campoDisabled
+                                                        "
                                                     ></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="3">
@@ -220,6 +252,9 @@
                                                         label="Bairro"
                                                         outlined
                                                         hide-details="auto"
+                                                        :disabled="
+                                                            campoDisabled
+                                                        "
                                                     ></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="3">
@@ -227,6 +262,9 @@
                                                         label="Email"
                                                         outlined
                                                         hide-details="auto"
+                                                        :disabled="
+                                                            campoDisabled
+                                                        "
                                                     ></v-text-field>
                                                 </v-col>
                                             </v-row>
@@ -238,32 +276,47 @@
                                             >
                                                 <v-btn
                                                     color="primary"
+                                                    :disabled="
+                                                        adicionarDisabled
+                                                    "
                                                     :loading="adicionando"
                                                     @click="adicionar()"
                                                 >
                                                     <v-icon left>
                                                         mdi-plus </v-icon
-                                                    >Adicionar</v-btn
+                                                    >{{ adicionarLabel }}</v-btn
                                                 >
                                                 <v-btn
                                                     class="ml-2"
                                                     color="primary"
-                                                    :loading="salvando"
+                                                    :disabled="alterarDisabled"
+                                                    :loading="alterando"
                                                     @click="alterar()"
                                                 >
                                                     <v-icon left>
                                                         mdi-pencil </v-icon
-                                                    >Alterar
+                                                    >{{ alterarLabel }}
                                                 </v-btn>
                                                 <v-btn
                                                     class="ml-2"
-                                                    color="primary"
+                                                    :disabled="excluirDisabled"
                                                     :loading="excluindo"
+                                                    color="primary"
                                                     @click="excluir()"
                                                 >
                                                     <v-icon left>
                                                         mdi-delete </v-icon
                                                     >Excluir</v-btn
+                                                >
+                                                <v-btn
+                                                    class="ml-2"
+                                                    :disabled="voltarDisabled"
+                                                    color="primary"
+                                                    @click="voltar()"
+                                                >
+                                                    <v-icon left>
+                                                        mdi-undo-variant </v-icon
+                                                    >voltar</v-btn
                                                 >
                                             </v-row>
                                         </v-card-actions>
@@ -280,6 +333,9 @@
                                                         outlined
                                                         label="Plano"
                                                         hide-details="auto"
+                                                        :disabled="
+                                                            campoDisabled
+                                                        "
                                                     ></v-combobox>
                                                 </v-col>
                                                 <v-col cols="12" sm="3">
@@ -287,6 +343,9 @@
                                                         outlined
                                                         label="Plano"
                                                         hide-details="auto"
+                                                        :disabled="
+                                                            campoDisabled
+                                                        "
                                                     ></v-combobox>
                                                 </v-col>
                                                 <v-col cols="12" sm="2">
@@ -294,6 +353,9 @@
                                                         outlined
                                                         label="Versão"
                                                         hide-details="auto"
+                                                        :disabled="
+                                                            campoDisabled
+                                                        "
                                                     ></v-combobox>
                                                 </v-col>
                                                 <v-col cols="12" sm="2">
@@ -330,6 +392,9 @@
                                                                 "
                                                                 v-on="on"
                                                                 outlined
+                                                                :disabled="
+                                                                    campoDisabled
+                                                                "
                                                             ></v-text-field>
                                                         </template>
                                                         <v-date-picker
@@ -377,6 +442,9 @@
                                                                 "
                                                                 v-on="on"
                                                                 outlined
+                                                                :disabled="
+                                                                    campoDisabled
+                                                                "
                                                             ></v-text-field>
                                                         </template>
                                                         <v-date-picker
@@ -400,6 +468,9 @@
                                                         outlined
                                                         label="Benefício"
                                                         hide-details="auto"
+                                                        :disabled="
+                                                            campoDisabled
+                                                        "                                                        
                                                     ></v-combobox>
                                                 </v-col>
                                                 <v-col cols="12" sm="2">
@@ -437,6 +508,9 @@
                                                                 v-on="on"
                                                                 outlined
                                                                 hide-details="auto"
+                                                                :disabled="
+                                                                    campoDisabled
+                                                                "
                                                             ></v-text-field>
                                                         </template>
                                                         <v-date-picker
@@ -485,6 +559,9 @@
                                                                 v-on="on"
                                                                 outlined
                                                                 hide-details="auto"
+                                                                :disabled="
+                                                                    campoDisabled
+                                                                "
                                                             ></v-text-field>
                                                         </template>
                                                         <v-date-picker
@@ -503,6 +580,9 @@
                                                         label="Valor"
                                                         outlined
                                                         hide-details="auto"
+                                                        :disabled="
+                                                            campoDisabled
+                                                        "
                                                     ></v-text-field>
                                                 </v-col>
                                             </v-row>
@@ -514,32 +594,47 @@
                                             >
                                                 <v-btn
                                                     color="primary"
+                                                    :disabled="
+                                                        adicionarDisabled
+                                                    "
                                                     :loading="adicionando"
                                                     @click="adicionar()"
                                                 >
                                                     <v-icon left>
                                                         mdi-plus </v-icon
-                                                    >Adicionar</v-btn
+                                                    >{{ adicionarLabel }}</v-btn
                                                 >
                                                 <v-btn
                                                     class="ml-2"
                                                     color="primary"
-                                                    :loading="salvando"
+                                                    :disabled="alterarDisabled"
+                                                    :loading="alterando"
                                                     @click="alterar()"
                                                 >
                                                     <v-icon left>
                                                         mdi-pencil </v-icon
-                                                    >Alterar
+                                                    >{{ alterarLabel }}
                                                 </v-btn>
                                                 <v-btn
                                                     class="ml-2"
-                                                    color="primary"
+                                                    :disabled="excluirDisabled"
                                                     :loading="excluindo"
+                                                    color="primary"
                                                     @click="excluir()"
                                                 >
                                                     <v-icon left>
                                                         mdi-delete </v-icon
                                                     >Excluir</v-btn
+                                                >
+                                                <v-btn
+                                                    class="ml-2"
+                                                    :disabled="voltarDisabled"
+                                                    color="primary"
+                                                    @click="voltar()"
+                                                >
+                                                    <v-icon left>
+                                                        mdi-undo-variant </v-icon
+                                                    >voltar</v-btn
                                                 >
                                             </v-row>
                                         </v-card-actions>
@@ -569,10 +664,19 @@ export default {
 
     data() {
         return {
+            adicionarLabel: "Adicionar",
+            alterarLabel: "Alterar",
+
             pesquisando: false,
-            salvando: false,
+            alterando: false,
             adicionando: false,
             excluindo: false,
+
+            alterarDisabled: true,
+            adicionarDisabled: false,
+            excluirDisabled: true,
+            voltarDisabled: true,
+            campoDisabled: true,
 
             dataAdmissao1: "",
             dataAdmissaoFormatada1: "",
@@ -694,9 +798,8 @@ export default {
         },
 
         alterar() {
-            this.salvando = true;
+            this.alterando = true;
             let self = this;
-            console.log(JSON.parse(JSON.stringify(this.empresa)));
             EmpresaService.alterar(JSON.parse(JSON.stringify(this.empresa)))
                 .then((response) => {
                     console.log(response);
@@ -705,30 +808,46 @@ export default {
                     console.log(error);
                 })
                 .then(function () {
-                    self.salvando = false;
+                    self.alterando = false;
+                    self.alterarLabel = "Alterar";
+                    self.alterarDisabled = true;
+                    self.campoDisabled = true;
+                    self.voltarDisabled = true;
+                    self.excluirDisabled = true;
+                    self.adicionarDisabled = false;
+                    self.apagarEmpresa();
                 });
         },
 
         adicionar() {
-            this.adicionando = true;
-            let self = this;
-            console.log(JSON.parse(JSON.stringify(this.empresa)));
-            EmpresaService.adicionar(JSON.parse(JSON.stringify(this.empresa)))
-                .then((response) => {
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                })
-                .then(function () {
-                    self.adicionando = false;
-                });
+            if (this.adicionarLabel == "Adicionar") {
+                this.adicionarLabel = "Salvar";
+                this.voltarDisabled = false;
+                this.campoDisabled = false;
+            } else {
+                this.adicionando = true;
+                let self = this;
+                EmpresaService.adicionar(
+                    JSON.parse(JSON.stringify(this.empresa))
+                )
+                    .then((response) => {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+                    .then(function () {
+                        self.adicionando = false;
+                        self.adicionarLabel = "Adicionar";
+                        self.campoDisabled = true;
+                        self.voltarDisabled = true;
+                    });
+            }
         },
 
         excluir() {
             this.excluindo = true;
             let self = this;
-            console.log(JSON.parse(JSON.stringify(this.empresa)));
             EmpresaService.excluir(JSON.parse(JSON.stringify(this.empresa)))
                 .then((response) => {
                     self.empresa = {};
@@ -739,11 +858,23 @@ export default {
                 })
                 .then(function () {
                     self.excluindo = false;
+                    self.alterarLabel = "Alterar";
+                    self.alterarDisabled = true;
+                    self.campoDisabled = true;
+                    self.voltarDisabled = true;
+                    self.excluirDisabled = true;
+                    self.adicionarDisabled = false;
+                    self.apagarEmpresa();
+                    self.pesquisar(); // refresh em v-data-table
                 });
         },
 
-        apagar() {
-            this.empresas = []
+        apagarEmpresas() {
+            this.empresas = [];
+        },
+
+        apagarEmpresa() {
+            this.empresa = {};
         },
 
         formatDate(date) {
@@ -775,8 +906,25 @@ export default {
             return retorno;
         },
 
-        selecionado(obj) {
-            this.empresa = obj;
+        selecionar(empresa) {
+            this.empresa = empresa;
+            this.alterarLabel = "Salvar";
+            this.adicionarDisabled = true;
+            this.alterarDisabled = false;
+            this.excluirDisabled = false;
+            this.voltarDisabled = false;
+            this.campoDisabled = false;
+        },
+
+        voltar() {
+            this.apagarEmpresa();
+            this.adicionarLabel = "Adicionar";
+            this.alterarLabel = "Alterar";
+            this.adicionarDisabled = false;
+            this.alterarDisabled = true;
+            this.excluirDisabled = true;
+            this.voltarDisabled = true;
+            this.campoDisabled = true;
         },
     },
 };
