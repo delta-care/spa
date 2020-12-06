@@ -26,7 +26,7 @@
                 </v-card-title>
 
                 <v-card-text>
-                    Alteração não salva será pertida, caso exista.
+                    Alteração não salva será perdida, caso exista.
                 </v-card-text>
 
                 <v-card-actions>
