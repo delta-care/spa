@@ -655,6 +655,7 @@ import { mapActions } from "vuex";
 
 export default {
     name: "Empresa",
+    title: "Gestão de Empresa",
     components: {
         AppToolbar,
         AppMenu,

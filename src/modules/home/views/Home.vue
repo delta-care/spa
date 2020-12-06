@@ -18,6 +18,7 @@ import { mapActions } from "vuex";
 
 export default {
     name: "Painel",
+    title: "Home",
     components: {
         AppToolbar,
         AppMenu,

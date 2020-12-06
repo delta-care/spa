@@ -79,6 +79,7 @@ import authService from "./../services/";
 
 export default {
   name: "Login",
+  title: "Login",
   data: () => ({
     user: {
       email: "",
