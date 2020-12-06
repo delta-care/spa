@@ -11,7 +11,7 @@ const routes = [
   ...LoginRouter,
   ...HomeRouter,
   ...EmpresaRouter,
-  { path: '/', redirect: '/login' }
+  { path: '/', redirect: '/entrar' }
 ]
 
 const router = new VueRouter({
@@ -24,7 +24,7 @@ router.beforeEach(async (to, from, next) => {
   if (to.matched.some(route => route.meta.requiresLogin)) {
     const token = window.localStorage.getItem('token')
     const loginRoute = {
-      path: '/login',
+      path: '/entrar',
       query: { redirect: to.fullPath }
     }
     if (token) {
