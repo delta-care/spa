@@ -76,7 +76,6 @@
 <script>
 import { required, minLength, email } from "vuelidate/lib/validators";
 import authService from "./../services/";
-import getEnv from '@/utils/env'
 
 export default {
   name: "Login",
@@ -148,10 +147,5 @@ export default {
       }
     },
   },
-  created() {
-    console.log(process.env);
-    console.log(getEnv('VUE_APP_EMPRESA_API'));
-    console.log(getEnv('VUE_APP_USUARIO_API'));
-  }
 };
 </script>
