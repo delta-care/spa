@@ -1,8 +1,7 @@
 import axios from 'axios'
-import getEnv from '@/utils/env'
 
 const api = axios.create({
-    baseURL: getEnv('VUE_APP_USUARIO_API'),
+    baseURL: process.env.VUE_APP_USUARIO_API,
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
