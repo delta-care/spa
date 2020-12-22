@@ -20,8 +20,4 @@ version: 0.1.0
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
-# O valor desse parâmetro é sobrescrito pelo valor do parâmetro image.tag passado quando jenkins 
-# executa o comando helm upgrade. Para isso, /templates/_helpers.tpl foi alterado. Dessa forma, 
-# o valor desse parâmetro é definido no pipeline para garantir a coesão com a versão definida 
-# no código do app (package.json, pom.xml etc). Por: David Carvalho.
 appVersion: 0.1.0
