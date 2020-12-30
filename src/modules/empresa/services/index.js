@@ -10,19 +10,19 @@ const api = axios.create({
 })
 
 function adicionar(dados) {
-    return api.post('/empresas/', dados)
+    return api.post('/', dados)
 }
 
 function alterar(dados) {
-    return api.patch('/empresas/' + dados.id, dados)
+    return api.put('/' + dados.id, dados)
 }
 
 function obter(dados) {
-    return api.get('/empresas/', { params: dados } )
+    return api.get('/', { params: dados } )
 }
 
 function excluir(dados) {
-    return api.delete('/empresas/' + dados.id, dados)
+    return api.delete('/' + dados.id, dados)
 }
 
 export default {
