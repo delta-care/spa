@@ -50,7 +50,8 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
+import Vue from 'vue';
 
 export default {
     name: "AppToolbar",
@@ -71,8 +72,7 @@ export default {
     },
     methods: {
         logout() {
-            localStorage.removeItem('token');
-            this.$router.push('/entrar');
+            Vue.$keycloak.logout();
         }
     },
 };

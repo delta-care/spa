@@ -1,28 +1,25 @@
 import axios from 'axios'
 import getEnv from '@/utils/env'
 
-const api = axios.create({
-    baseURL: getEnv('VUE_APP_USUARIO_API'),
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    }
-})
+axios.interceptors.request.use(async config => {
+    config.baseURL=getEnv('VUE_APP_EMPRESA_API');
+    return config;
+});
 
 function adicionar(dados) {
-    return api.post('/empresas/', dados)
+    return axios.post('/empresas/', dados)
 }
 
 function alterar(dados) {
-    return api.patch('/empresas/' + dados.id, dados)
+    return axios.patch('/empresas/' + dados.id, dados)
 }
 
 function obter(dados) {
-    return api.get('/empresas/', { params: dados } )
+    return axios.get('/empresas/', { params: dados } )
 }
 
 function excluir(dados) {
-    return api.delete('/empresas/' + dados.id, dados)
+    return axios.delete('/empresas/' + dados.id, dados)
 }
 
 export default {

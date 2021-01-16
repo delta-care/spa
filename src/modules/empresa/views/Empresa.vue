@@ -786,7 +786,6 @@ export default {
             EmpresaService.obter(this.clean(this.pesquisa))
                 .then((response) => {
                     this.empresas = response.data;
-                    console.log(response);
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -800,9 +799,7 @@ export default {
             this.alterando = true;
             let self = this;
             EmpresaService.alterar(JSON.parse(JSON.stringify(this.empresa)))
-                .then((response) => {
-                    console.log(response);
-                })
+                .then(() => {})
                 .catch(function (error) {
                     console.log(error);
                 })
@@ -829,9 +826,7 @@ export default {
                 EmpresaService.adicionar(
                     JSON.parse(JSON.stringify(this.empresa))
                 )
-                    .then((response) => {
-                        console.log(response);
-                    })
+                    .then(() => {})
                     .catch(function (error) {
                         console.log(error);
                     })
@@ -848,9 +843,8 @@ export default {
             this.excluindo = true;
             let self = this;
             EmpresaService.excluir(JSON.parse(JSON.stringify(this.empresa)))
-                .then((response) => {
+                .then(() => {
                     self.empresa = {};
-                    console.log(response);
                 })
                 .catch(function (error) {
                     console.log(error);
