@@ -42,7 +42,7 @@ podTemplate(
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy DEV') {
             container('helm') {
                 sh "sed -i 's/^appVersion:.*\$/appVersion: ${APP_VERSION}/' ./helm/Chart.yaml"
                 sh "helm upgrade ${APP_NAME} ./helm --install --set image.tag=${APP_VERSION} --namespace ${K8S_NAMESPACE} --set ingress.hosts[0].host=${SUBDOMAIN}.${DOMAIN} --set ingress.hosts[0].paths[0].path=/"
