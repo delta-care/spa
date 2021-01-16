@@ -19,7 +19,7 @@ Vue.$keycloak.init({ onLoad: 'login-required' })
         Promise.all([userInfoLoaded, userProfileLoaded]).then(() => {
             renderApp();
             setVerifySessionOnFocus();
-            Vue.$keycloak.debugToken();
+            //Vue.$keycloak.debugToken();
           });
     })
 
