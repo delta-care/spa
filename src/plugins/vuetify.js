@@ -5,7 +5,7 @@ import pt from 'vuetify/es5/locale/pt'
 Vue.use(Vuetify);
 
 export default new Vuetify({
-  theme: { dark: true },
+  theme: { dark: false },
   lang: {
     locales: { pt },
     current: 'pt',

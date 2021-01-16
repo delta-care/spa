@@ -17,7 +17,7 @@ import AppMenu from "./../../../components/AppMenu.vue";
 import { mapActions } from "vuex";
 
 export default {
-    name: "Painel",
+    name: "Home",
     title: "Home",
     components: {
         AppToolbar,

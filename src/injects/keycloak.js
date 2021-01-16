@@ -19,3 +19,12 @@ Vue.$keycloak.verifySession = function() {
     else
         Vue.$keycloak.updateToken(getEnv('VUE_APP_KEYCLOAK_MINVALIDITY'));   
 }
+
+Vue.$keycloak.debugToken = function() {
+    setInterval(() =>{
+        let refresh_expires = Math.round(Vue.$keycloak.refreshTokenParsed.exp + Vue.$keycloak.timeSkew - new Date().getTime() / 1000);
+        let token_expires =  Math.round(Vue.$keycloak.tokenParsed.exp + Vue.$keycloak.timeSkew - new Date().getTime() / 1000);
+        console.log('[DEBUG-TOKEN] Token expires in ' + token_expires + ' seconds');
+        console.log('[DEBUG-TOKEN] Refresh Expires in ' + refresh_expires + ' seconds');
+    }, 5000);
+}

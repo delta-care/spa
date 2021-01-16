@@ -12,27 +12,37 @@ Vue.config.productionTip = false
 Vue.mixin(title)
 
 Vue.$keycloak.init({ onLoad: 'login-required' })
-    .success((auth) => {
-        if(!auth) {
-            window.location.reload();
-        }
-        new Vue({
-            router,
-            store,
-            vuetify,
-            vuelidate,
-            render: h => h(App)
-        }).$mount('#app')
-
-        window.onfocus = () => {
-            Vue.$keycloak.verifySession();
-        };
-
-        // setInterval(() =>{
-        //     let refresh_expires = Math.round(Vue.$keycloak.refreshTokenParsed.exp + Vue.$keycloak.timeSkew - new Date().getTime() / 1000);
-        //     console.log(Vue.$keycloak);
-        //     console.log('>>> Token expires in ' + Math.round(Vue.$keycloak.tokenParsed.exp + Vue.$keycloak.timeSkew - new Date().getTime() / 1000) + ' seconds');
-        //     console.log('>>> Refresh Expires in ' + refresh_expires + ' seconds');
-        // }, 5000);
-
+    .success(() => {
+        let userInfoLoaded = Vue.$keycloak.loadUserInfo().success(setUserInfo);
+        let userProfileLoaded = Vue.$keycloak.loadUserProfile().success(setUserProfile);
+        
+        Promise.all([userInfoLoaded, userProfileLoaded]).then(() => {
+            renderApp();
+            setVerifySessionOnFocus();
+            Vue.$keycloak.debugToken();
+          });
     })
+
+function setUserInfo(userInfo) {
+    Vue.$keycloak.userInfo = userInfo;
+}
+
+function setUserProfile(userProfile) {
+    Vue.$keycloak.userProfile = userProfile;
+}
+
+function renderApp() {
+    new Vue({
+        router,
+        store,
+        vuetify,
+        vuelidate,
+        render: h => h(App)
+    }).$mount('#app');
+}
+
+function setVerifySessionOnFocus() {
+    window.onfocus = () => {
+        Vue.$keycloak.verifySession();
+    };
+}
