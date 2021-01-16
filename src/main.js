@@ -13,24 +13,14 @@ Vue.mixin(title)
 
 Vue.$keycloak.init({ onLoad: 'login-required' })
     .success(() => {
-        let userInfoLoaded = Vue.$keycloak.loadUserInfo().success(setUserInfo);
-        let userProfileLoaded = Vue.$keycloak.loadUserProfile().success(setUserProfile);
-        
-        Promise.all([userInfoLoaded, userProfileLoaded]).then(() => {
+        Vue.$keycloak.loadUserInfo().success(function setUserInfo(userInfo) {
+            Vue.$keycloak.userInfo = userInfo;
             renderApp();
             setVerifySessionOnFocus();
             //Vue.$keycloak.debugToken();
-          });
+        });
     })
-
-function setUserInfo(userInfo) {
-    Vue.$keycloak.userInfo = userInfo;
-}
-
-function setUserProfile(userProfile) {
-    Vue.$keycloak.userProfile = userProfile;
-}
-
+    
 function renderApp() {
     new Vue({
         router,
