@@ -16,7 +16,7 @@ Vue.$keycloak.init({ onLoad: 'login-required' })
         Vue.$keycloak.loadUserInfo().success(function setUserInfo(userInfo) {
             Vue.$keycloak.userInfo = userInfo;
             renderApp();
-            //setVerifySessionOnFocus();
+            setVerifySessionOnFocus();
             //Vue.$keycloak.debugToken();
         });
     })
@@ -31,8 +31,8 @@ function renderApp() {
     }).$mount('#app');
 }
 
-//function setVerifySessionOnFocus() {
-//    window.onfocus = () => {
-//        Vue.$keycloak.verifySession();
-//    };
-//}
+function setVerifySessionOnFocus() {
+    window.onfocus = () => {
+        Vue.$keycloak.verifySession();
+    };
+}
