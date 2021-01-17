@@ -14,10 +14,13 @@ Vue.$keycloak.verifySession = function() {
     let ssoSessionIdle = Math.round(
                             Vue.$keycloak.refreshTokenParsed.exp + 
                             Vue.$keycloak.timeSkew - new Date().getTime() / 1000);
-    if (ssoSessionIdle < 0) 
-        Vue.$keycloak.logout();
-    else
-        Vue.$keycloak.updateToken(getEnv('VUE_APP_KEYCLOAK_MINVALIDITY'));   
+    console.log('verifySession');
+    console.log(ssoSessionIdle);
+    console.log(Vue.$keycloak);
+    //if (ssoSessionIdle < 0) 
+    //    Vue.$keycloak.logout();
+    //else
+    //    Vue.$keycloak.updateToken(getEnv('VUE_APP_KEYCLOAK_MINVALIDITY'));   
 }
 
 Vue.$keycloak.debugToken = function() {
