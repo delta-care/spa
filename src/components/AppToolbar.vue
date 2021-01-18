@@ -67,7 +67,8 @@ export default {
     data() {
         return {
             showLogoutDialog: false,
-            userName: Vue.$keycloak.userInfo.name
+            //userName: Vue.$keycloak.userInfo.name
+            userName: ''
         };
     },
     computed: {
