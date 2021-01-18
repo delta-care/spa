@@ -32,8 +32,8 @@ function renderApp() {
     }).$mount('#app');
 }
 
-function setVerifySessionOnFocus() {
-    window.onfocus = () => {
-        Vue.$keycloak.verifySession();
-    };
-}
+//function setVerifySessionOnFocus() {
+//    window.onfocus = () => {
+//        Vue.$keycloak.verifySession();
+//    };
+//}
