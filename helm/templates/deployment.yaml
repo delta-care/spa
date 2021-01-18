@@ -3,7 +3,8 @@ kind: Deployment
 metadata:
   name: {{ include "web-src.fullname" . }}
   labels:
-    {{- include "web-src.labels" . | nindent 4 }}
+    app: {{ .Chart.Name }}
+    version: {{ .Chart.AppVersion }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
