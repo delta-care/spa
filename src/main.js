@@ -13,14 +13,14 @@ Vue.mixin(title)
 
 Vue.$keycloak.init({ onLoad: 'login-required' })
     .success(() => {
-//        Vue.$keycloak.loadUserInfo().success(function setUserInfo(userInfo) {
-//            Vue.$keycloak.userInfo = userInfo;
+        Vue.$keycloak.loadUserInfo().success(function setUserInfo(userInfo) {
+            Vue.$keycloak.userInfo = userInfo;
             console.log(Vue.$keycloak);
             renderApp();
-            console.log('v2')
-            //setVerifySessionOnFocus();
-            //Vue.$keycloak.debugToken();
-        //});
+            console.log('v3');
+            setVerifySessionOnFocus();
+            Vue.$keycloak.debugToken();
+        });
     })
     
 function renderApp() {
@@ -33,8 +33,8 @@ function renderApp() {
     }).$mount('#app');
 }
 
-//function setVerifySessionOnFocus() {
-//    window.onfocus = () => {
-//        Vue.$keycloak.verifySession();
-//    };
-//}
+function setVerifySessionOnFocus() {
+    window.onfocus = () => {
+        Vue.$keycloak.verifySession();
+    };
+}
