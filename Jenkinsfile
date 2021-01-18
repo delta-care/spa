@@ -42,15 +42,15 @@ podTemplate(
             }
         }
 
-        stage('Deploy DEV') {
-            container('helm') {
-                sh "sed -i 's/^appVersion:.*\$/appVersion: ${APP_VERSION}/' ./helm/Chart.yaml"
-                sh "helm upgrade ${APP_NAME} ./helm --install --set image.tag=${APP_VERSION} --namespace ${K8S_NAMESPACE} --set ingress.hosts[0].host=${SUBDOMAIN}.${DOMAIN} --set ingress.hosts[0].paths[0].path=/"
-                sh "helm repo add deltacare ${URL_REPO_CHART}"
-                sh "helm plugin install ${URL_REPO_HPUSH}"
-                sh "helm push helm/ deltacare"
-                sh "helm repo update"
-            }
-        }
+        //stage('Deploy DEV') {
+        //    container('helm') {
+        //        sh "sed -i 's/^appVersion:.*\$/appVersion: ${APP_VERSION}/' ./helm/Chart.yaml"
+        //        sh "helm upgrade ${APP_NAME} ./helm --install --set image.tag=${APP_VERSION} --namespace ${K8S_NAMESPACE} --set ingress.hosts[0].host=${SUBDOMAIN}.${DOMAIN} --set ingress.hosts[0].paths[0].path=/"
+        //        sh "helm repo add deltacare ${URL_REPO_CHART}"
+        //        sh "helm plugin install ${URL_REPO_HPUSH}"
+        //        sh "helm push helm/ deltacare"
+        //        sh "helm repo update"
+        //    }
+        //}
     }
 }
