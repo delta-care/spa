@@ -11,7 +11,8 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      {{- include "web-src.selectorLabels" . | nindent 6 }}
+      app: {{ .Chart.Name }}
+      version: {{ .Chart.AppVersion }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -19,7 +20,8 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "web-src.selectorLabels" . | nindent 8 }}
+        app: {{ .Chart.Name }}
+        version: {{ .Chart.AppVersion }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
