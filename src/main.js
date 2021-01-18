@@ -15,9 +15,7 @@ Vue.$keycloak.init({ onLoad: 'login-required' })
     .success(() => {
         Vue.$keycloak.loadUserInfo().success(function setUserInfo(userInfo) {
             Vue.$keycloak.userInfo = userInfo;
-            console.log(Vue.$keycloak);
             renderApp();
-            console.log('v3');
             setVerifySessionOnFocus();
             Vue.$keycloak.debugToken();
         });
