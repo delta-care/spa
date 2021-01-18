@@ -20,7 +20,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-    Vue.$keycloak.verifySession();
+    //Vue.$keycloak.verifySession();
     next();
 })
 
