@@ -4,6 +4,7 @@ metadata:
   name: {{ include "web-src.fullname" . }}
   labels:
     app: {{ .Chart.Name }}
+    version: {{ .Chart.AppVersion }}
 spec:
   type: {{ .Values.service.type }}
   ports:
