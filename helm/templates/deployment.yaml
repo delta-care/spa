@@ -1,90 +1,60 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "web-src.fullname" . }}
+  name: {{.Values.app.name}}
   labels:
-    app: {{ .Chart.Name }}
-    version: {{ .Chart.AppVersion }}
+    app: {{.Values.app.name}}
+    version: {{.Values.image.tag}}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
+  replicas: 1
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}
-      version: {{ .Chart.AppVersion }}
+      app: {{.Values.app.name}}
+      version: {{.Values.image.tag}}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
-        app: {{ .Chart.Name }}
-        version: {{ .Chart.AppVersion }}
+        app: {{.Values.app.name}}
+        version: {{.Values.image.tag}}
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      serviceAccountName: {{ include "web-src.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      serviceAccountName: {{.Values.app.name}}
       containers:
-        - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-          env:
-          - name: VUE_APP_EMPRESAS_API
-            valueFrom:
-              configMapKeyRef:
-                name: deltacare
-                key: VUE_APP_EMPRESAS_API
-          - name: VUE_APP_KEYCLOAK_AUTH_URL
-            valueFrom:
-              configMapKeyRef:
-                name: deltacare
-                key: VUE_APP_KEYCLOAK_AUTH_URL
-          - name: VUE_APP_KEYCLOAK_REALM
-            valueFrom:
-              configMapKeyRef:
-                name: deltacare
-                key: VUE_APP_KEYCLOAK_REALM
-          - name: VUE_APP_KEYCLOAK_CLIENT_ID
-            valueFrom:
-              configMapKeyRef:
-                name: deltacare
-                key: VUE_APP_KEYCLOAK_CLIENT_ID
-          - name: VUE_APP_KEYCLOAK_MINVALIDITY
-            valueFrom:
-              configMapKeyRef:
-                name: deltacare
-                key: VUE_APP_KEYCLOAK_MINVALIDITY
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+      - name: {{.Values.app.name}}
+        image: {{.Values.image.repository}}:{{.Values.image.tag}}
+        ports:
+          - containerPort: {{.Values.service.port}}
+            protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: {{.Values.app.health.path}}
+            port: {{.Values.service.port}}
+        readinessProbe:
+          httpGet:
+            path: {{.Values.app.health.path}}
+            port: {{.Values.service.port}}
+        env:
+        - name: VUE_APP_EMPRESAS_API
+          valueFrom:
+            configMapKeyRef:
+              name: web
+              key: VUE_APP_EMPRESAS_API
+        - name: VUE_APP_KEYCLOAK_AUTH_URL
+          valueFrom:
+            configMapKeyRef:
+              name: web
+              key: VUE_APP_KEYCLOAK_AUTH_URL
+        - name: VUE_APP_KEYCLOAK_REALM
+          valueFrom:
+            configMapKeyRef:
+              name: web
+              key: VUE_APP_KEYCLOAK_REALM
+        - name: VUE_APP_KEYCLOAK_CLIENT_ID
+          valueFrom:
+            configMapKeyRef:
+              name: web
+              key: VUE_APP_KEYCLOAK_CLIENT_ID
+        - name: VUE_APP_KEYCLOAK_MINVALIDITY
+          valueFrom:
+            configMapKeyRef:
+              name: web
+              key: VUE_APP_KEYCLOAK_MINVALIDITY

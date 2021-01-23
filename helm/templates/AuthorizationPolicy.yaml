@@ -1,0 +1,23 @@
+apiVersion: "security.istio.io/v1beta1"
+kind: AuthorizationPolicy
+metadata:
+  name: {{.Values.app.name}}
+spec:
+  selector:
+    matchLabels:
+      app: web-src
+  rules:
+    - to:
+        - operation:
+            methods:
+              - GET
+            paths:
+              - /
+              - /css/*
+              - /js/*
+              - /img/*
+              - /favicon.ico
+              - /home
+              - /painel
+              - /empresa
+  action: ALLOW
