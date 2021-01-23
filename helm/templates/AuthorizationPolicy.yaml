@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: web-src
+      app: {{.Values.app.name}}
   rules:
     - to:
         - operation:

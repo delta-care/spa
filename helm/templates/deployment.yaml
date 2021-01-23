@@ -28,25 +28,25 @@ spec:
         - name: VUE_APP_EMPRESAS_API
           valueFrom:
             configMapKeyRef:
-              name: web
+              name: {{.Values.app.name}}
               key: VUE_APP_EMPRESAS_API
         - name: VUE_APP_KEYCLOAK_AUTH_URL
           valueFrom:
             configMapKeyRef:
-              name: web
+              name: {{.Values.app.name}}
               key: VUE_APP_KEYCLOAK_AUTH_URL
         - name: VUE_APP_KEYCLOAK_REALM
           valueFrom:
             configMapKeyRef:
-              name: web
+              name: {{.Values.app.name}}
               key: VUE_APP_KEYCLOAK_REALM
         - name: VUE_APP_KEYCLOAK_CLIENT_ID
           valueFrom:
             configMapKeyRef:
-              name: web
+              name: {{.Values.app.name}}
               key: VUE_APP_KEYCLOAK_CLIENT_ID
         - name: VUE_APP_KEYCLOAK_MINVALIDITY
           valueFrom:
             configMapKeyRef:
-              name: web
+              name: {{.Values.app.name}}
               key: VUE_APP_KEYCLOAK_MINVALIDITY
