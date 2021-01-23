@@ -14,7 +14,7 @@ podTemplate(
 {
     node('deltacare') {
 
-        def APP_NAME='web-src'
+        def APP_NAME='spa'
         def APP_VERSION
         def URL_REPO_GIT="https://github.com/delta-care/${APP_NAME}.git"
         def URL_REPO_CHART="http://deltacare-chartmuseum:8080"
