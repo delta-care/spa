@@ -43,7 +43,7 @@ podTemplate(
         stage('Deploy DEV') {
             container('helm') {
                 sh "sed -i 's/^appVersion:.*\$/appVersion: ${APP_VERSION}/' ./helm/Chart.yaml"
-                sh "helm upgrade ${APP_NAME} ./helm --install --force --namespace ${K8S_NAMESPACE} --set image.tag=${APP_VERSION} --set k8s.namespace=${K8S_NAMESPACE}"
+                sh "helm upgrade ${APP_NAME} ./helm --force --namespace ${K8S_NAMESPACE} --set image.tag=${APP_VERSION} --set k8s.namespace=${K8S_NAMESPACE}"
                 sh "helm repo add deltacare ${URL_REPO_CHART}"
                 sh "helm plugin install ${URL_REPO_HPUSH}"
                 sh "helm push helm/ deltacare"
