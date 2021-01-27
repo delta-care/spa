@@ -29,7 +29,7 @@ podTemplate(
             def props = readJSON file: 'package.json'
             APP_VERSION = props.version
         }
-        /*
+        
         stage('Package') {
             container('docker') {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_HUB_PASS', usernameVariable: 'DOCKER_HUB_USER')]) {
@@ -39,7 +39,7 @@ podTemplate(
                 }
             }
         }
-        */
+        
         stage('Deploy DEV') {
             container('helm') {
                 sh "sed -i 's/^appVersion:.*\$/appVersion: ${APP_VERSION}/' ./helm/Chart.yaml"
