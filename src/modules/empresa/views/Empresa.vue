@@ -208,17 +208,6 @@
                                                 </v-btn>
                                                 <v-btn
                                                     class="ml-2"
-                                                    :disabled="excluirDesabilitado"
-                                                    :loading="excluindo"
-                                                    color="primary"
-                                                    @click="excluir()"
-                                                >
-                                                    <v-icon left>
-                                                        mdi-delete </v-icon
-                                                    >Excluir</v-btn
-                                                >
-                                                <v-btn
-                                                    class="ml-2"
                                                     :disabled="voltarDesabilitado"
                                                     color="primary"
                                                     @click="voltar()"
@@ -328,17 +317,6 @@
                                                         mdi-pencil </v-icon
                                                     >{{ alterarLabel }}
                                                 </v-btn>
-                                                <v-btn
-                                                    class="ml-2"
-                                                    :disabled="excluirDesabilitado"
-                                                    :loading="excluindo"
-                                                    color="primary"
-                                                    @click="excluir()"
-                                                >
-                                                    <v-icon left>
-                                                        mdi-delete </v-icon
-                                                    >Excluir</v-btn
-                                                >
                                                 <v-btn
                                                     class="ml-2"
                                                     :disabled="voltarDesabilitado"
@@ -452,17 +430,6 @@
                                                 </v-btn>
                                                 <v-btn
                                                     class="ml-2"
-                                                    :disabled="excluirDesabilitado"
-                                                    :loading="excluindo"
-                                                    color="primary"
-                                                    @click="excluir()"
-                                                >
-                                                    <v-icon left>
-                                                        mdi-delete </v-icon
-                                                    >Excluir</v-btn
-                                                >
-                                                <v-btn
-                                                    class="ml-2"
                                                     :disabled="voltarDesabilitado"
                                                     color="primary"
                                                     @click="voltar()"
@@ -511,7 +478,6 @@ export default {
 
             alterarDesabilitado: true,
             adicionarDesabilitado: false,
-            excluirDesabilitado: true,
             voltarDesabilitado: true,
             camposDesabilitados: true,
 
@@ -584,7 +550,6 @@ export default {
                     self.alterarDesabilitado = true;
                     self.camposDesabilitados = true;
                     self.voltarDesabilitado = true;
-                    self.excluirDesabilitado = true;
                     self.adicionarDesabilitado = false;
                     self.apagarEmpresa();
                 });
@@ -637,29 +602,6 @@ export default {
 
         transformarObjVueParaObjNormal(obj) {
             return Object.assign ({}, obj)
-        },
-
-        excluir() {
-            this.excluindo = true;
-            let self = this;
-            EmpresaService.excluir(JSON.parse(JSON.stringify(this.empresa)))
-                .then(() => {
-                    self.empresa = {};
-                })
-                .catch(function (error) {
-                    console.log(error);
-                })
-                .then(function () {
-                    self.excluindo = false;
-                    self.alterarLabel = "Alterar";
-                    self.alterarDesabilitado = true;
-                    self.camposDesabilitados = true;
-                    self.voltarDesabilitado = true;
-                    self.excluirDesabilitado = true;
-                    self.adicionarDesabilitado = false;
-                    self.apagarEmpresa();
-                    self.pesquisar(); // refresh em v-data-table
-                });
         },
 
         apagarEmpresas() {
@@ -726,7 +668,6 @@ export default {
             this.alterarLabel = "Salvar";
             this.adicionarDesabilitado = true;
             this.alterarDesabilitado = false;
-            this.excluirDesabilitado = false;
             this.voltarDesabilitado = false;
             this.camposDesabilitados = false;
         },
@@ -737,7 +678,6 @@ export default {
             this.alterarLabel = "Alterar";
             this.adicionarDesabilitado = false;
             this.alterarDesabilitado = true;
-            this.excluirDesabilitado = true;
             this.voltarDesabilitado = true;
             this.camposDesabilitados = true;
         },
