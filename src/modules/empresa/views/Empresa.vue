@@ -10,7 +10,7 @@
                             label="Código"
                             outlined
                             hide-details="auto"
-                            v-model="pesquisa.codigo"
+                            v-model="pesquisa.id"
                         ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="3">
@@ -93,7 +93,7 @@
                                                         label="Código"
                                                         outlined
                                                         hide-details="auto"
-                                                        v-model="empresa.codigo"
+                                                        v-model="empresa.id"
                                                         :disabled="true"
                                                     ></v-text-field>
                                                 </v-col>
@@ -518,30 +518,30 @@ export default {
             tab: null,
 
             headers: [
-                { text: "Código", value: "codigo" },
+                { text: "Código", value: "id" },
                 { text: "CNPJ", value: "cnpj" },
                 { text: "Nome", value: "nome" },
-                { text: "Produtos", value: "produtos" },
-                { text: "Coberturas", value: "coberturas" },
+                { text: "Produtos", value: "produtos.qtd" },
+                { text: "Beneficiários", value: "beneficiarios.qtd" },
                 { text: "Visualizar", value: "actions", sortable: false },
             ],
 
             empresas: [],
-            empresa: {
-                codigo: "",
+            empresa: {  
+                id: "",
                 cnpj: "",
                 nome: "",
                 email: "",
                 cep: "",
                 logradouro: "",
                 bairro: "",
-                uf: "",
+                uf: "",   
                 produtos: [],
                 beneficiarios: [],
             },
 
             pesquisa: {
-                codigo: "",
+                id: "",
                 cnpj: "",
                 nome: "",
             },
@@ -555,6 +555,10 @@ export default {
             EmpresaService.obter(this.clean(this.pesquisa))
                 .then((response) => {
                     this.empresas = response.data;
+                    this.empresas.forEach(empresa => {
+                        empresa.beneficiarios.qtd = empresa.beneficiarios.length;
+                        empresa.produtos.qtd = empresa.produtos.length;
+                    });
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -567,7 +571,9 @@ export default {
         alterar() {
             this.alterando = true;
             let self = this;
-            EmpresaService.alterar(JSON.parse(JSON.stringify(this.empresa)))
+            const empresaSomenteDados = this.retornarEmpresaSomenteDados();
+            //EmpresaService.alterar(JSON.parse(JSON.stringify(this.empresa)))
+            EmpresaService.alterar(empresaSomenteDados)
                 .then(() => {})
                 .catch(function (error) {
                     console.log(error);
@@ -702,7 +708,21 @@ export default {
         },
 
         selecionar(empresa) {
-            this.empresa = empresa;
+            let self = this;
+            this.empresa.bairro = empresa.bairro;
+            this.empresa.cep = empresa.cep;
+            this.empresa.cnpj = empresa.cnpj;
+            this.empresa.email = empresa.email;
+            this.empresa.id = empresa.id;
+            this.empresa.logradouro = empresa.logradouro;
+            this.empresa.nome = empresa.nome;
+            this.empresa.uf = empresa.uf;
+            this.empresa.beneficiarios = [];
+            empresa.beneficiarios.forEach(beneficiario => { self.criarBeneficiarioDados(beneficiario, self); });
+            this.criarBeneficiario();
+            this.empresa.produtos = [];
+            empresa.produtos.forEach(produto => { self.criarProdutoDados(produto, self); });
+            this.criarProduto();
             this.alterarLabel = "Salvar";
             this.adicionarDesabilitado = true;
             this.alterarDesabilitado = false;
@@ -848,6 +868,58 @@ export default {
                 },
             }
             this.empresa.beneficiarios.push(beneficiario);
+        },
+
+        criarBeneficiarioDados (dados, self) {
+            let beneficiario = {
+                id: this.gerarStringUnica(5),
+                campos: {
+                    botao: {
+                        cor: "red",
+                        icone: "mdi-minus"
+                    },
+                    plano: {
+                        exibir: true
+                    },
+                    subplano: {
+                        exibir: true                            
+                    },
+                    nome: {
+                        exibir: true                            
+                    },
+                    cpf: {
+                        exibir: true                            
+                    }
+                }, 
+                dados: dados,
+            }
+            self.empresa.beneficiarios.push(beneficiario);
+        },
+
+        criarProdutoDados (dados, self) {
+            let produto = {
+                id: this.gerarStringUnica(5),
+                campos: {
+                    botao: {
+                        cor: "red",
+                        icone: "mdi-minus"
+                    },
+                    plano: {
+                        exibir: true
+                    },
+                    subplano: {
+                        exibir: true                            
+                    },
+                    data_inicio_vigencia: {
+                        exibir: true                            
+                    },
+                    data_fim_vigencia: {
+                        exibir: true                            
+                    }
+                }, 
+                dados: dados,
+            }
+            self.empresa.produtos.push(produto);
         },
 
         excluirBeneficiario (beneficiarioClicado) {

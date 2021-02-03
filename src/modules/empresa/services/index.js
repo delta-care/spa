@@ -11,7 +11,7 @@ function adicionar(dados) {
 }
 
 function alterar(dados) {
-    return axios.put('/' + dados.id, dados)
+    return axios.put('/', dados)
 }
 
 function obter(dados) {
