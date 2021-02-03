@@ -63,6 +63,7 @@ export default {
     }),
     computed: {
         telasAutorizadas: function () {
+            //return this.telas;
             let telasAutorizadasNoKeyCloak = Vue.$keycloak.tokenParsed.realm_access.roles;
             return this.telas.filter(function (tela) {
                 return telasAutorizadasNoKeyCloak.includes(tela.title.toLowerCase());

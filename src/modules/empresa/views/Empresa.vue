@@ -10,7 +10,7 @@
                             label="Código"
                             outlined
                             hide-details="auto"
-                            v-model="pesquisa.id"
+                            v-model="pesquisa.codigo"
                         ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="3">
@@ -507,7 +507,7 @@ export default {
             },
 
             pesquisa: {
-                id: "",
+                codigo: "",
                 cnpj: "",
                 nome: "",
             },
@@ -552,6 +552,7 @@ export default {
                     self.voltarDesabilitado = true;
                     self.adicionarDesabilitado = false;
                     self.apagarEmpresa();
+                    self.apagarEmpresas();
                 });
         },
 
@@ -574,6 +575,8 @@ export default {
                         self.adicionarLabel = "Adicionar";
                         self.camposDesabilitados = true;
                         self.voltarDesabilitado = true;
+                        self.apagarEmpresa();
+                        self.apagarEmpresas();
                     });
             }
         },
