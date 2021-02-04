@@ -1,25 +1,22 @@
 import axios from 'axios'
 import getEnv from '@/utils/env'
 
-axios.interceptors.request.use(async config => {
-    config.baseURL=getEnv('VUE_APP_PRODUTOS_API');
-    return config;
-});
+const baseURL = getEnv('VUE_APP_PRODUTOS_API');
 
 function adicionar(dados) {
-    return axios.post('/', dados)
+    return axios.post(baseURL + '/', dados)
 }
 
 function alterar(dados) {
-    return axios.put('/', dados)
+    return axios.put(baseURL + '/', dados)
 }
 
 function obter(dados) {
-    return axios.get('/', { params: dados } )
+    return axios.get(baseURL + '/', { params: dados } )
 }
 
 function excluir(dados) {
-    return axios.delete('/' + dados.id, dados)
+    return axios.delete(baseURL + '/' + dados.id, dados)
 }
 
 export default {
