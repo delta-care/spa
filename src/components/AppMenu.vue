@@ -54,6 +54,12 @@ export default {
                 exact: true,
             },
             {
+                title: "Produto",
+                icon: "mdi-book-outline",
+                path: "/produto",
+                exact: true,
+            },
+            {
                 title: "Empresa",
                 icon: "mdi-domain",
                 path: "/empresa",
