@@ -64,6 +64,12 @@ export default {
                 icon: "mdi-domain",
                 path: "/empresa",
                 exact: true,
+            },
+            {
+                title: "Fatura",
+                icon: "mdi-cash",
+                path: "/fatura",
+                exact: true,
             }
         ],
     }),
