@@ -102,7 +102,11 @@ export default {
                 tooltip: {
                     y: {
                         formatter: function (val) {
-                        return "R$ " + val
+                            const formatter = new Intl.NumberFormat('pt-BR', {
+                                style: 'currency',
+                                currency: 'BRL',
+                            });
+                            return formatter.format(val)
                         }
                     }
                 }
@@ -153,7 +157,11 @@ export default {
                 tooltip: {
                     y: {
                         formatter: function (val) {
-                        return "R$ " + val
+                            const formatter = new Intl.NumberFormat('pt-BR', {
+                                style: 'currency',
+                                currency: 'BRL',
+                            });
+                            return formatter.format(val)
                         }
                     }
                 }
@@ -204,7 +212,11 @@ export default {
                 tooltip: {
                     y: {
                         formatter: function (val) {
-                        return "R$ " + val
+                            const formatter = new Intl.NumberFormat('pt-BR', {
+                                style: 'currency',
+                                currency: 'BRL',
+                            });
+                            return formatter.format(val)
                         }
                     }
                 }               
@@ -336,37 +348,49 @@ export default {
         },
         carregarReceita(dados) {
             let self = this;
+            const formatter = new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+            });
             let receita_total=0;
             dados[0].receitas.forEach(receita => {
                 self.series_receita[0].data.push(receita.valor);
                 self.chartOptions_receita.xaxis.categories.push(receita.mes);
                 receita_total = receita_total + parseInt(receita.valor);
             });
-            this.chartOptions_receita.title.text='R$' + receita_total + ',00';
+            this.chartOptions_receita.title.text=formatter.format(receita_total);
             this.$refs.receita.updateOptions(this.chartOptions_receita);
             this.$refs.receita.updateSeries(this.series_receita);
         },
         carregarDespesa(dados) {
             let self = this;
+            const formatter = new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+            });
             let despesa_total=0;
             dados[0].despesas.forEach(despesa => {
                 self.series_despesa[0].data.push(despesa.valor);
                 self.chartOptions_despesa.xaxis.categories.push(despesa.mes);
                 despesa_total = despesa_total + parseInt(despesa.valor);
             });
-            this.chartOptions_despesa.title.text='R$' + despesa_total + ',00';
+            this.chartOptions_despesa.title.text=formatter.format(despesa_total);
             this.$refs.despesa.updateOptions(this.chartOptions_despesa);
             this.$refs.despesa.updateSeries(this.series_despesa);
         },
         carregarResultado(dados) {
             let self = this;
+            const formatter = new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+            });
             let resultado_total=0;
             dados[0].resultados.forEach(resultado => {
                 self.series_resultado[0].data.push(resultado.valor);
                 self.chartOptions_resultado.xaxis.categories.push(resultado.mes);
                 resultado_total = resultado_total + parseInt(resultado.valor);
             });
-            this.chartOptions_resultado.title.text='R$' + resultado_total + ',00';
+            this.chartOptions_resultado.title.text=formatter.format(resultado_total);
             this.$refs.resultado.updateOptions(this.chartOptions_resultado);
             this.$refs.resultado.updateSeries(this.series_resultado);
         },
