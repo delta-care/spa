@@ -40,6 +40,11 @@ spec:
             configMapKeyRef:
               name: {{.Values.app.name}}
               key: VUE_APP_FATURAS_API  
+        - name: VUE_APP_PAINEL_API
+          valueFrom:
+            configMapKeyRef:
+              name: {{.Values.app.name}}
+              key: VUE_APP_PAINEL_API 
         - name: VUE_APP_KEYCLOAK_AUTH_URL
           valueFrom:
             configMapKeyRef:
