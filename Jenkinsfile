@@ -21,7 +21,7 @@ podTemplate(
         def URL_REPO_HPUSH="https://github.com/chartmuseum/helm-push.git"
         def IMAGE_NAME_DOCKER="deltacare/${APP_NAME}"
         def IMAGE_NAME_CHART="deltacare/${APP_NAME}"
-        def K8S_NAMESPACE='dev'
+        def K8S_NAMESPACE='prd'
         def OBJ_REPO_GIT
 
         stage('Checkout') {
