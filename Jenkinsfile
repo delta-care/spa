@@ -50,7 +50,7 @@ podTemplate(
             container('helm') {
                 sh "sed -i 's/^appVersion:.*\$/appVersion: ${APP_VERSION}/' ./helm/Chart.yaml"
                 sh "helm uninstall ${APP_NAME} --namespace ${K8S_NAMESPACE}"
-                //sh "helm install ${APP_NAME} ./helm --namespace ${K8S_NAMESPACE} --set image.tag=${APP_VERSION} --set k8s.namespace=${K8S_NAMESPACE} --set ops.env=${ENV}"
+                sh "helm install ${APP_NAME} ./helm --namespace ${K8S_NAMESPACE} --set image.tag=${APP_VERSION} --set k8s.namespace=${K8S_NAMESPACE} --set ops.env=${ENV}"
                 sh "helm upgrade ${APP_NAME} ./helm --install --namespace ${K8S_NAMESPACE} --set ops.env=${ENV} --set image.tag=${APP_VERSION} --set k8s.namespace=${K8S_NAMESPACE}"
                 sh "helm repo add deltacare ${URL_REPO_CHART}"
                 sh "helm plugin install ${URL_REPO_HPUSH}"
@@ -88,7 +88,7 @@ podTemplate(
         stage('Deploy PRD') {
             container('helm') {
                 sh "sed -i 's/^appVersion:.*\$/appVersion: ${APP_VERSION}/' ./helm/Chart.yaml"
-                //sh "helm uninstall ${APP_NAME} --namespace ${K8S_NAMESPACE}"
+                sh "helm uninstall ${APP_NAME} --namespace ${K8S_NAMESPACE}"
                 sh "helm upgrade ${APP_NAME} ./helm --install --namespace ${K8S_NAMESPACE} --set ops.env=${ENV} --set image.tag=${APP_VERSION} --set k8s.namespace=${K8S_NAMESPACE}"
                 sh "helm repo add deltacare ${URL_REPO_CHART}"
                 sh "helm plugin install ${URL_REPO_HPUSH}"
