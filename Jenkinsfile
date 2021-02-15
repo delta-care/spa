@@ -70,14 +70,10 @@ podTemplate(
         
         stage('Release') {
             OBJ_REPO_GIT = git branch: 'main', credentialsId: 'github', url: URL_REPO_GIT
-            def props = readMavenPom file: 'pom.xml'
+            def props = readJSON file: 'package.json'
             APP_VERSION = props.version
-
-            container('maven') {
-                sh 'mvn clean package -D skipTests=true'
-            }
             
-            container('docker') {                
+            container('docker') {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_HUB_PASS', usernameVariable: 'DOCKER_HUB_USER')]) {
                     sh "docker build -t ${IMAGE_NAME_DOCKER}:${APP_VERSION} ."
                     sh "docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASS}"
