@@ -29,22 +29,22 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: {{.Values.app.name}}
-              key: VUE_APP_EMPRESAS_API
+              key: VUE_APP_EMPRESAS_API_{{.Values.ops.env}}
         - name: VUE_APP_PRODUTOS_API
           valueFrom:
             configMapKeyRef:
               name: {{.Values.app.name}}
-              key: VUE_APP_PRODUTOS_API
+              key: VUE_APP_PRODUTOS_API_{{.Values.ops.env}}
         - name: VUE_APP_FATURAS_API
           valueFrom:
             configMapKeyRef:
               name: {{.Values.app.name}}
-              key: VUE_APP_FATURAS_API  
+              key: VUE_APP_FATURAS_API_{{.Values.ops.env}} 
         - name: VUE_APP_PAINEL_API
           valueFrom:
             configMapKeyRef:
               name: {{.Values.app.name}}
-              key: VUE_APP_PAINEL_API 
+              key: VUE_APP_PAINEL_API_{{.Values.ops.env}} 
         - name: VUE_APP_KEYCLOAK_AUTH_URL
           valueFrom:
             configMapKeyRef:
@@ -54,7 +54,7 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: {{.Values.app.name}}
-              key: VUE_APP_KEYCLOAK_REALM
+              key: VUE_APP_KEYCLOAK_REALM_{{.Values.ops.env}}
         - name: VUE_APP_KEYCLOAK_CLIENT_ID
           valueFrom:
             configMapKeyRef:
