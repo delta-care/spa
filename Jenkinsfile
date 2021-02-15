@@ -86,7 +86,7 @@ podTemplate(
             }
         }
         
-        APP_PROFILE='prd'
+        ENV='PRD'
         K8S_NAMESPACE='prd'
         
         stage('Deploy PRD') {
