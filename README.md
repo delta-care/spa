@@ -1,4 +1,4 @@
-# telas
+# spa
 
 ## Project setup
 ```
